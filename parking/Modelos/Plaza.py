@@ -1,5 +1,14 @@
-class Plaza():
-    def __init__(self,tipo,costMin):
+from sqlalchemy.orm import relationship
+from Servicios import db
+from sqlalchemy import Column, Integer, String, Float,DateTime
+class Plaza(db.Base):
+    __tablename__='Plaza'
+    id=Column(Integer,primary_key=True)
+    identificador=Column(String,nullable=True)
+    tipo=Column(String)
+    costMin=Column(Float)
+    def __init__(self,tipo,costMin,identificador):
+        self.__identificador=identificador
         self.__ocupado=False
         self.__tipo=tipo
         self.__coste_minimo=costMin
@@ -21,3 +30,11 @@ class Plaza():
     @coste_minimo.setter
     def coste_minimo(self,coste_minimo):
         self.__coste_minimo=coste_minimo
+    @property
+    def identificador(self):
+        return self.__identificador
+    @identificador.setter
+    def identificador(self,identificador):
+        self.__identificador=identificador
+    def __str__(self):
+        return f"Identificador -> {self.identificador}, Ocupado -> {self.ocupado}, Tipo -> {self.tipo}, Coste Mínimo -> {self.coste_minimo}"

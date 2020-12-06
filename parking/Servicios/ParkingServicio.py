@@ -8,3 +8,7 @@ def mostrarDisponibilidad(parking):
     print(f"Encontramos disponibles {ParkingRepository.contadorPlazasLibres(turismos)} plazas para turismo")
     print(f"Encontramos disponibles {ParkingRepository.contadorPlazasLibres(motos)} plazas para motos")
     print(f"Encontramos disponibles {ParkingRepository.contadorPlazasLibres(movilidad)} plazas para movilidad reducida")
+
+
+def darPlazaLibreTipo(parking,tipo):
+    return ParkingRepository.darPlazaLibreTipo(parking,tipo)

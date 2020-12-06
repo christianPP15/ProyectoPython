@@ -28,3 +28,5 @@ class Cliente():
     @abono.setter
     def abono(self,abono):
         self.__abono=abono
+    def __str__(self):
+        return f"Nombre -> {self.nombre}, Apellidos -> {self.apellidos}, Vehiculo -> {self.vehiculo}, Abono -> {self.abono}"

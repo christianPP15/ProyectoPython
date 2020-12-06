@@ -7,13 +7,13 @@ class Parking():
         self.__motos=[]
         self.__movilidad_reducida=[]
         for i in range(34):
-            turismo=Plaza.Plaza(cadena[0],precio[0])
+            turismo=Plaza.Plaza(cadena[0],precio[0],'t'+str(i+1))
             self.__turismos.append(turismo)
         for i in range(8):
-            moto=Plaza.Plaza(cadena[1],precio[1])
+            moto=Plaza.Plaza(cadena[1],precio[1],'m'+str(i+1))
             self.__motos.append(moto)
         for i in range(8):
-            movilidad=Plaza.Plaza(cadena[2],cadena[2])
+            movilidad=Plaza.Plaza(cadena[2],cadena[2],'r'+str(i+1))
             self.__movilidad_reducida.append(movilidad)
 
     @property
@@ -25,4 +25,5 @@ class Parking():
     @property
     def movilidad(self):
         return self.__movilidad_reducida
-
+    def __str__(self):
+        return f"Plazas de turismo -> {self.turismos}, Plazas motos -> {self.motos}, Plazas movilidad reducida -> {self.movilidad}"

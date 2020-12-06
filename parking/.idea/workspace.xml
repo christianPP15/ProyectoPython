@@ -19,7 +19,27 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c42bc471-4055-4202-927e-b56941ac53c2" name="Default Changelist" comment="" />
+    <list default="true" id="c42bc471-4055-4202-927e-b56941ac53c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Modelos/Ticket.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositorios/ClienteRepository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositorios/PlazaRepository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositorios/TicketRepository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Servicios/ClienteServicio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Servicios/PlazaServicio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Servicios/TicketServicio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Servicios/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/parking.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/parking.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelos/Abono.py" beforeDir="false" afterPath="$PROJECT_DIR$/Modelos/Abono.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelos/Clientes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Modelos/Clientes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelos/Parking.py" beforeDir="false" afterPath="$PROJECT_DIR$/Modelos/Parking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelos/Plaza.py" beforeDir="false" afterPath="$PROJECT_DIR$/Modelos/Plaza.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modelos/Vehiculos.py" beforeDir="false" afterPath="$PROJECT_DIR$/Modelos/Vehiculos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repositorios/ParkingRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/Repositorios/ParkingRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Servicios/ParkingServicio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Servicios/ParkingServicio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +64,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.index">
     <configuration name="Abono" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -132,25 +153,33 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="291" key="GridCell.Tab.0.bottom" timestamp="1607267013955">
+    <state x="704" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607291172501">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607267013955" />
-    <state width="1899" height="291" key="GridCell.Tab.0.center" timestamp="1607267013955">
+    <state x="704" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607291172501" />
+    <state x="707" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1607291200002">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607267013955" />
-    <state width="1899" height="291" key="GridCell.Tab.0.left" timestamp="1607267013955">
+    <state x="707" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1607291200002" />
+    <state width="1899" height="291" key="GridCell.Tab.0.bottom" timestamp="1607291160719">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607267013955" />
-    <state width="1899" height="291" key="GridCell.Tab.0.right" timestamp="1607267013955">
+    <state width="1899" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607291160719" />
+    <state width="1899" height="291" key="GridCell.Tab.0.center" timestamp="1607291160719">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607267013955" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1607185063525">
+    <state width="1899" height="291" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607291160719" />
+    <state width="1899" height="291" key="GridCell.Tab.0.left" timestamp="1607291160719">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607185063525" />
+    <state width="1899" height="291" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607291160719" />
+    <state width="1899" height="291" key="GridCell.Tab.0.right" timestamp="1607291160719">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="291" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607291160719" />
+    <state x="461" y="164" key="SettingsEditor" timestamp="1607290610832">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607290610832" />
   </component>
 </project>

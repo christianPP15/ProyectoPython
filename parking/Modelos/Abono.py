@@ -24,7 +24,11 @@ class Abono():
     @precio.setter
     def precio(self,precio):
         self.__precio=precio
-
+    @property
+    def pin(self):
+        return self.__pin
+    def __str__(self):
+        return f"Fecha Inicial -> {self.fechaInicial},Fecha Final -> {self.fechaFinal}, Precio -> {self.precio}, Pin -> {self.pin}"
 
 
 
