@@ -1,11 +1,13 @@
 import random
-class Abono():
-    def __init__(self,fechaInicial,fechaFinal,precio):
-        self.__fechaInicial=fechaInicial
-        self.__fechaFinal=fechaFinal
-        self.__precio=precio
-        self.__pin=__definir_pin__()
-
+from Servicios import db
+from sqlalchemy import Column, Integer, String, Float,Boolean,DateTime
+class Abono(db.Base):
+    __tablename__ = 'Abono'
+    id=Column(Integer,primary_key=True)
+    __fechaInicial=Column(DateTime)
+    __fechaFinal=Column(DateTime)
+    __precio=Column(Float)
+    __pin=Column(Integer)
     @property
     def fechaInicial(self):
         return self.__fechaInicial
@@ -27,6 +29,9 @@ class Abono():
     @property
     def pin(self):
         return self.__pin
+    @pin.setter
+    def pin(self,pin):
+        self.__pin=pin
     def __str__(self):
         return f"Fecha Inicial -> {self.fechaInicial},Fecha Final -> {self.fechaFinal}, Precio -> {self.precio}, Pin -> {self.pin}"
 

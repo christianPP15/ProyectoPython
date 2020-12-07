@@ -4,6 +4,7 @@ from Modelos import Vehiculos
 from Modelos import  Ticket
 from Servicios import TicketServicio
 import datetime
+
 def reservarPlaza(parking,tickets):
     tipo=int(input("1.Turismo\t"
            "2.Motocicleta\t"

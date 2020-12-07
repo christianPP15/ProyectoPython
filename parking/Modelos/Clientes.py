@@ -1,9 +1,15 @@
-class Cliente():
-    def __init__(self, nombre, apellidos, vehiculo, abono):
-        self.__nombre=nombre
-        self.__apellidos=apellidos
-        self.__vehiculo=vehiculo
-        self.__abono=abono
+from Servicios import db
+from sqlalchemy import Column, Integer, String, Float,Boolean,DateTime,ForeignKey
+from sqlalchemy.orm import relationship
+class Cliente(db.Base):
+    __tablename__='Cliente'
+    id=Column(Integer,primary_key=True)
+    __nombre=Column(String,nullable=True)
+    __apellidos=Column(String)
+    __vehiculo_id=Column(Integer(),ForeignKey('Vehiculos.id'))
+    __vehiculo=relationship('Vehiculos')
+    __abono_id=Column(Integer(),ForeignKey('Abono.id'))
+    __abono=relationship('Abono')
     @property
     def nombre(self):
         return self.__nombre

@@ -1,13 +1,10 @@
 from Servicios import db
 from sqlalchemy import Column, Integer, String, Float
 class Vehiculos(db.Base):
-    __tablename__='Vehículos'
+    __tablename__='Vehiculos'
     id=Column(Integer,primary_key=True)
-    matricula=Column(String,nullable=False)
-    tipo=Column(String,nullable=False)
-    def __init__(self,matricula,tipo):
-        self.__matricula=matricula
-        self.__tipo=tipo
+    __matricula=Column(String,nullable=False)
+    __tipo=Column(String,nullable=False)
     @property
     def matricula(self):
         return self.__matricula
