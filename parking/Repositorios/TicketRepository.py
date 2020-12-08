@@ -1,3 +1,5 @@
+from Servicios import db
+from Modelos import Ticket,Vehiculos,Plaza
 def pintarTicket(ticket):
     print("------------------------------")
     print(f"Entrada -> {ticket.fechaEntrada}")
@@ -6,8 +8,15 @@ def pintarTicket(ticket):
     print("------------------------------")
 
 
-def buscarTicketRetirada(tickets, pin, matricula, identificador):
-    for i in tickets:
-        if i.pin == pin and i.matricula == matricula and i.plaza.identificador == identificador:
-            return i
-    return -1
+def buscarTicketRetirada( pin, matricula, identificador):
+    ticket=db.session.query(Ticket.Ticket).join(Vehiculos.Vehiculos).join(Plaza.Plaza).filter(
+        Vehiculos.Vehiculos._Vehiculos__matricula==matricula
+    ).filter(
+        Ticket.Ticket._Ticket__pin==pin
+    ).filter(
+        Plaza.Plaza._Plaza__identificador==identificador
+    ).first()
+    if ticket:
+        return ticket
+    else:
+        return -1

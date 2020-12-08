@@ -10,6 +10,7 @@ class Plaza(db.Base):
     __tipo = Column(String)
     __coste_minimo = Column(Float)
     __ocupado=Column(Boolean)
+    __reservado=Column(Boolean)
     @property
     def ocupado(self):
         return self.__ocupado
@@ -41,6 +42,11 @@ class Plaza(db.Base):
     @identificador.setter
     def identificador(self, identificador):
         self.__identificador = identificador
-
+    @property
+    def reservado(self):
+        return self.__reservado
+    @reservado.setter
+    def reservado(self,reservado):
+        self.__reservado=reservado
     def __str__(self):
-        return f"Identificador -> {self.identificador}, Ocupado -> {self.ocupado}, Tipo -> {self.tipo}, Coste Mínimo -> {self.coste_minimo}"
+        return f"Identificador -> {self.identificador}, Ocupado -> {self.ocupado}, Tipo -> {self.tipo}, Coste Mínimo -> {self.coste_minimo}, Reservado -> {self.reservado}"
