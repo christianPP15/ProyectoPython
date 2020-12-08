@@ -1,13 +1,14 @@
 from Modelos import Plaza
 from sqlalchemy.orm import relationship
 from Servicios import db
-from sqlalchemy import Column, Integer, String, Float,Boolean
-class Parking():
-    #__tablename__ = 'Parking'
-    #id=Column(Integer,primary_key=True)
-    #__turismos=relationship('Plaza',Column(ARRAY))
-    #__motos=relationship('Plaza',Column(ARRAY))
-    #__movilidad=relationship('Plaza',Column(ARRAY))
+from sqlalchemy import Column, Integer, String, Float,Boolean,ForeignKey
+class Parking(db.Base):
+    __tablename__ = 'Parking'
+    id=Column(Integer,primary_key=True)
+    __turismos_id=Column(Integer(),ForeignKey('Plaza.id'))
+    __turismos=relationship('Plaza')
+    __motos=relationship('Plaza')
+    __movilidad=relationship('Plaza')
     def __init__(self):
         cadena=["Turismo", "Moto", "Movilidad reducida"]
         precio=[0.12,0.08,0.10];

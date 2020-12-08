@@ -58,3 +58,4 @@ for i in plazas:
     print(i)
 for i in abonos:
     print(i)
+print(parking)
