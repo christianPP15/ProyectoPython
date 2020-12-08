@@ -3,9 +3,9 @@ from Modelos import Ticket,Plaza,Abono,Vehiculos,Clientes
 from Servicios import db
 import datetime
 if __name__=='__main__':
-    db.Base.metadata.drop_all(db.engine)
+    #db.Base.metadata.drop_all(db.engine)
     db.Base.metadata.create_all(db.engine)
-PlazaServicio.cargarDatosInicio()
+#PlazaServicio.cargarDatosInicio()
 t = datetime.timedelta(days=14, hours=4, seconds=1000)
 fecha1=datetime.datetime.now()
 fecha2=datetime.datetime.now()
@@ -36,7 +36,7 @@ def switch(case):
 
 def switchAdmin(case):
     if case==1:
-        pass
+        PlazaServicio.pintarEstado(PlazaServicio.estadoParking())
     elif case==2:
         pass
     elif case==3:
@@ -62,7 +62,11 @@ def switchAbonos(case):
     elif case==2:
         pass
     elif case==3:
-        pass
+        AbonoServicio.borrarAbono()
+    elif case==4:
+        abonos=db.session.query(Abono.Abono).all()
+        for i in abonos:
+            print(i)
     elif case==0:
         print("Volviendo al menú de administración")
     else:
@@ -79,3 +83,4 @@ while case>=1:
 
 
 print("Gracias por contar con nosotros")
+

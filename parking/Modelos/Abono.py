@@ -1,6 +1,7 @@
 import random
 from Servicios import db
-from sqlalchemy import Column, Integer, String, Float,Boolean,DateTime
+from sqlalchemy import Column, Integer, String, Float,Boolean,DateTime,ForeignKey
+from sqlalchemy.orm import relationship
 class Abono(db.Base):
     __tablename__ = 'Abono'
     id=Column(Integer,primary_key=True)
@@ -8,6 +9,9 @@ class Abono(db.Base):
     __fechaFinal=Column(DateTime)
     __precio=Column(Float)
     __pin=Column(Integer)
+    __meses=Column(Integer)
+    __plaza_id=Column(Integer(), ForeignKey('Plaza.id'))
+    __plaza=relationship('Plaza')
     @property
     def fechaInicial(self):
         return self.__fechaInicial
@@ -32,6 +36,18 @@ class Abono(db.Base):
     @pin.setter
     def pin(self,pin):
         self.__pin=pin
+    @property
+    def meses(self):
+        return self.__meses
+    @meses.setter
+    def meses(self,meses):
+        self.__meses=meses
+    @property
+    def plaza(self):
+        return self.__plaza
+    @plaza.setter
+    def plaza(self,plaza):
+        self.__plaza=plaza
     def __str__(self):
         return f"Fecha Inicial -> {self.fechaInicial},Fecha Final -> {self.fechaFinal}, Precio -> {self.precio}, Pin -> {self.pin}"
 

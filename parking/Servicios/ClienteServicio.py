@@ -1,7 +1,7 @@
 from Servicios import PlazaServicio
 import random
 from Modelos import Vehiculos
-from Modelos import  Ticket
+from Modelos import Ticket
 from Servicios import TicketServicio
 from Repositorios import ClienteRepository
 from Servicios import db
@@ -9,6 +9,10 @@ import datetime
 
 def reservarPlaza():
     tipo=int(input("1.Turismo\t"
+           "2.Motocicleta\t"
+           "3.Movilidad reducida"))
+    while tipo>3 or tipo<=0:
+        tipo=int(input("1.Turismo\t"
            "2.Motocicleta\t"
            "3.Movilidad reducida"))
     if tipo==1:

@@ -31,3 +31,24 @@ def cargarDatosInicio():
         movilidad=Plaza.Plaza(tipo=cadena[2],coste_minimo=precio[2],identificador='r'+str(i+1),ocupado=False,reservado=False)
         db.session.add(movilidad)
         db.session.commit()
+
+def reservarPlaza(plaza):
+    PlazaRepository.reservarPlaza(plaza)
+def desReservarPlaza(plaza):
+    PlazaRepository.desReservarPlaza(plaza)
+
+def estadoParking():
+    diccionarioEstado={}
+    plazas=PlazaRepository.consultarTodasLasPlazas()
+    for i in plazas:
+        if i.ocupado and i.reservado:
+            diccionarioEstado[i.identificador]="Abono ocupado"
+        elif i.reservado and not i.ocupado:
+            diccionarioEstado[i.identificador]="Abono libre"
+        elif not i.reservado and not i.ocupado:
+            diccionarioEstado[i.identificador]="Plaza libre"
+        elif not i.reservado and i.ocupado:
+            diccionarioEstado[i.identificador]="Plaza ocupada"
+    return diccionarioEstado
+def pintarEstado(mapa):
+    PlazaRepository.pintarEstado(mapa)
