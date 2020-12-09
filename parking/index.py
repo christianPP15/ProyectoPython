@@ -6,10 +6,7 @@ if __name__=='__main__':
     #db.Base.metadata.drop_all(db.engine)
     db.Base.metadata.create_all(db.engine)
 #PlazaServicio.cargarDatosInicio()
-t = datetime.timedelta(days=14, hours=4, seconds=1000)
-fecha1=datetime.datetime.now()
-fecha2=datetime.datetime.now()
-fecha2=fecha2+t
+
 salirVal=False
 salirValAdmin=False
 case=15000
@@ -19,8 +16,12 @@ def switch(case):
        ClienteServicio.reservarPlaza()
     elif case==2:
         ClienteServicio.retirarVehiculo()
+    elif case==3:
+        ClienteServicio.depositarAbonados()
+    elif case==4:
+        ClienteServicio.retirarAbono()
     elif case==5:
-        while case>=1:
+        while case!=0:
             case=int(input("\n\nMenú Administración introduce una opción"
                            "\n1.Estado del parking"
                            "\n2.Facturación"
@@ -39,11 +40,11 @@ def switchAdmin(case):
     if case==1:
         PlazaServicio.pintarEstado(PlazaServicio.estadoParking())
     elif case==2:
-        pass
+        TicketServicio.facturacion()
     elif case==3:
         FacturaServicio.calcularFacturasAnio()
     elif case==4:
-        while case >=1:
+        while case !=0:
             case=int(input("\n\nOpciones abonados"
                            "\n1.Alta abonados"
                            "\n2.Edición abonados"
@@ -51,17 +52,37 @@ def switchAdmin(case):
                            "\n0.Salir"))
             switchAbonos(case)
     elif case==5:
-        pass
+        while case !=0:
+            case=int(input("\n\nOpciones caducidad"
+                           "\n1.Caducidad abono en un mes"
+                           "\n2.Caducidad en los proximos 10 días"
+                           "\n0.Salir"))
+            switchCaducidad(case)
+
     elif case==0:
         print("Volviendo al menú principal...")
     else:
         case=9000
         print("Error opción no valida")
+def switchCaducidad(case):
+    if case==1:
+        AbonoServicio.caducidadAbonoMes()
+    elif case==2:
+        AbonoServicio.caducidadAbonoProximos10Dias()
+    elif case==0:
+        print("Saliendo al menu de administración")
+    else:
+        print("Opción no valida")
 def switchAbonos(case):
     if case==1:
         AbonoServicio.AltaAbono()
     elif case==2:
-        pass
+        while case !=0:
+            case=int(input("\n\nOpciones edición"
+                           "\n1.Edición usuario"
+                           "\n2.Extender abono"
+                           "\n0.Salir"))
+            switchEdicion(case)
     elif case==3:
         AbonoServicio.borrarAbono()
     elif case==0:
@@ -69,11 +90,22 @@ def switchAbonos(case):
     else:
         case=9000
         print("Error, opción no valida")
+def switchEdicion(case):
+    if case==1:
+        AbonoServicio.edicionCliente()
+    elif case==2:
+        AbonoServicio.edicionAbono()
+    elif case==0:
+        print("Volviendo al menú de abonos")
+    else:
+        print("Error, opción no valida")
 while case>=1:
     PlazaServicio.mostrarDisponibilidad()
     case=int(input("\n\nIntroduce la opción"
                "\n1.Guardar Vehículo"
                "\n2.Retirar Vehículo"
+                   "\n3.Guardar Vehículo Abonado"
+                   "\n4.Retirar Vehículo Abonado"
                    "\n5.Administración"
                    "\n0.Salir"))
     switch(case)

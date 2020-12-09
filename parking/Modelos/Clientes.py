@@ -6,10 +6,13 @@ class Cliente(db.Base):
     id=Column(Integer,primary_key=True)
     __nombre=Column(String,nullable=True)
     __apellidos=Column(String)
+    __dni=Column(String)
     __vehiculo_id=Column(Integer(),ForeignKey('Vehiculos.id'))
     __vehiculo=relationship('Vehiculos')
     __abono_id=Column(Integer(),ForeignKey('Abono.id'))
     __abono=relationship('Abono')
+    __email=Column(String)
+    __tarjeta=Column(String)
     @property
     def nombre(self):
         return self.__nombre
@@ -34,5 +37,23 @@ class Cliente(db.Base):
     @abono.setter
     def abono(self,abono):
         self.__abono=abono
+    @property
+    def dni(self):
+        return self.__dni
+    @dni.setter
+    def dni(self,dni):
+        self.__dni=dni
+    @property
+    def tarjeta(self):
+        return self.__tarjeta
+    @tarjeta.setter
+    def tarjeta(self,tarjeta):
+        self.__tarjeta=tarjeta
+    @property
+    def email(self):
+        return self.__email
+    @email.setter
+    def email(self,email):
+        self.__email=email
     def __str__(self):
         return f"Nombre -> {self.nombre}, Apellidos -> {self.apellidos}, Vehiculo -> {self.vehiculo}, Abono -> {self.abono}"

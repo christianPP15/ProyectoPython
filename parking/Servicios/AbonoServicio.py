@@ -1,4 +1,4 @@
-from Servicios import db,PlazaServicio
+from Servicios import db,PlazaServicio,ClienteServicio
 from Modelos import Abono,Clientes,Vehiculos,Factura
 from Repositorios import AbonoRepository
 import datetime
@@ -30,9 +30,12 @@ def AltaAbono():
     abono=Abono.Abono(fechaInicial=datetime.datetime.now(),fechaFinal=fechaFinal,pin=random.randint(111111,999999),meses=mes,precio=precio,plaza=plazaReservada)
     nombre=input("Introduzca su nombre")
     apellidos=input("Introduzca sus apellidos")
+    dni=input("Introduzca su dni")
     matricula=input("Introduzca la matricula de su vehículo")
+    email=input("Introduzca su email")
+    tarjeta=input("Introduzca su tarjeta de crédito")
     vehiculoNuevo=Vehiculos.Vehiculos(matricula=matricula,tipo=tipo)
-    cliente=Clientes.Cliente(nombre=nombre,apellidos=apellidos,vehiculo=vehiculoNuevo,abono=abono)
+    cliente=Clientes.Cliente(nombre=nombre,apellidos=apellidos,vehiculo=vehiculoNuevo,abono=abono,dni=dni,email=email,tarjeta=tarjeta)
     factura=Factura.Factura(fechaCreacion=datetime.datetime.now(),cliente=cliente,coste=precio)
     db.session.add(factura)
     db.session.add(vehiculoNuevo)
@@ -96,4 +99,62 @@ def borrarAbono():
     else:
         print("Error con el identificador de la plaza")
 
+def edicionCliente():
+    nombre=input("Introduzca su nombre")
+    apellidos=input("Introduzca sus apellidos")
+    dni=input("Introduzca su dni")
+    matricula=input("Introduzca la matricula de su vehículo")
+    email=input("Introduzca su email")
+    tarjeta=input("Introduzca su tarjeta de crédito")
+    cliente=ClienteServicio.buscarClientePorDniMatricula(dni,matricula)
+    cliente.vehiculo.matricula=matricula
+    cliente.tarjeta=tarjeta
+    cliente.nombre=nombre
+    cliente.apellidos=apellidos
+    cliente.email=email
+    cliente.dni=dni
+    db.session.add(cliente)
+    db.session.commit()
+    print("Edición llevada a cabo correctamente")
+
+def edicionAbono():
+    dni=input("Introduzca su dni")
+    matricula=input("Introduzca la matricula de su vehículo")
+    pin=input("Introduzca su pin")
+    cliente=ClienteServicio.buscarClientePorDniPinMatricula(dni,matricula,pin)
+    abono=cliente.abono
+    meses={"1.Mensual":"25€","2.Trimestral":"70€","3.Semestral":"130€","4.Anual":"200€"}
+    for k,v in meses.items():
+        print(k+" -> "+v)
+    opcion=int(input("Elige una opción(1-4)"))
+    while opcion>4 or opcion<0:
+        opcion=int(input("Elige una opción(1-4)"))
+    mes,precio,fechaFinal=switchMeses(opcion)
+    abono.precio=precio
+    abono.meses=mes
+    abono.fechaFinal=fechaFinal
+
+def caducidadAbonoMes():
+    mes=int(input("Mes a comprobar: "))
+    anio=int(input("Año a comprobar: "))
+    caducados=AbonoRepository.devolverCaducadosEnElMes(mes,anio)
+    clientes=[]
+    for i in caducados:
+        clientes.append(ClienteServicio.buscarClientePorAbono(i))
+    print("Caduca el abono de los siguientes clientes")
+    print("---------------------------------------------------")
+    for i in clientes:
+        print("Nombre y apellidos "+i.nombre+ " "+i.apellidos+ " y con DNI "+i.dni)
+    print("---------------------------------------------------")
+
+def caducidadAbonoProximos10Dias():
+    caducados=AbonoRepository.caducidadAbonoProximosDias()
+    clientes=[]
+    for i in caducados:
+        clientes.append(ClienteServicio.buscarClientePorAbono(i))
+    print("Caduca el abono de los siguientes clientes")
+    print("---------------------------------------------------")
+    for i in clientes:
+        print("Nombre y apellidos "+i.nombre+ " "+i.apellidos)
+    print("---------------------------------------------------")
 
