@@ -10,6 +10,8 @@ if __name__=='__main__':
 
 def borrar():
     botonGuardarVehiculo.pack_forget()
+    nuevoBoton=Button(root,text="prueba")
+    nuevoBoton.pack()
 root=Tk()
 root.title("Gestión Parking")
 root.iconbitmap("img/icono.ico")
