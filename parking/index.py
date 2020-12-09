@@ -1,4 +1,4 @@
-from Servicios import PlazaServicio,AbonoServicio,TicketServicio,ClienteServicio
+from Servicios import PlazaServicio,AbonoServicio,TicketServicio,ClienteServicio,FacturaServicio
 from Modelos import Ticket,Plaza,Abono,Vehiculos,Clientes
 from Servicios import db
 import datetime
@@ -13,6 +13,7 @@ fecha2=fecha2+t
 salirVal=False
 salirValAdmin=False
 case=15000
+
 def switch(case):
     if case==1:
        ClienteServicio.reservarPlaza()
@@ -40,6 +41,8 @@ def switchAdmin(case):
     elif case==2:
         pass
     elif case==3:
+        FacturaServicio.calcularFacturasAnio()
+    elif case==4:
         while case >=1:
             case=int(input("\n\nOpciones abonados"
                            "\n1.Alta abonados"
@@ -47,8 +50,6 @@ def switchAdmin(case):
                            "\n3.Borrar abonados"
                            "\n0.Salir"))
             switchAbonos(case)
-    elif case==4:
-        pass
     elif case==5:
         pass
     elif case==0:
@@ -63,10 +64,6 @@ def switchAbonos(case):
         pass
     elif case==3:
         AbonoServicio.borrarAbono()
-    elif case==4:
-        abonos=db.session.query(Abono.Abono).all()
-        for i in abonos:
-            print(i)
     elif case==0:
         print("Volviendo al menú de administración")
     else:

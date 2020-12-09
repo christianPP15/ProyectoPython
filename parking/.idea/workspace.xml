@@ -20,16 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c42bc471-4055-4202-927e-b56941ac53c2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Modelos/Factura.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositorios/FacturaRepository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Servicios/FacturaServicio.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modelos/Abono.py" beforeDir="false" afterPath="$PROJECT_DIR$/Modelos/Abono.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositorios/AbonoRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/Repositorios/AbonoRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositorios/PlazaRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/Repositorios/PlazaRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Servicios/AbonoServicio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Servicios/AbonoServicio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Servicios/ClienteServicio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Servicios/ClienteServicio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Servicios/PlazaServicio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Servicios/PlazaServicio.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/keywords.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/keywords.sqlite" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,22 +150,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="375" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1607291200002" />
-    <state width="1899" height="291" key="GridCell.Tab.0.bottom" timestamp="1607465086312">
+    <state width="1899" height="291" key="GridCell.Tab.0.bottom" timestamp="1607498697720">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607465086312" />
-    <state width="1899" height="291" key="GridCell.Tab.0.center" timestamp="1607465086312">
+    <state width="1899" height="291" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607498697720" />
+    <state width="1899" height="291" key="GridCell.Tab.0.center" timestamp="1607498697720">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607465086312" />
-    <state width="1899" height="291" key="GridCell.Tab.0.left" timestamp="1607465086312">
+    <state width="1899" height="291" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607498697720" />
+    <state width="1899" height="291" key="GridCell.Tab.0.left" timestamp="1607498697720">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607465086312" />
-    <state width="1899" height="291" key="GridCell.Tab.0.right" timestamp="1607465086312">
+    <state width="1899" height="291" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607498697720" />
+    <state width="1899" height="291" key="GridCell.Tab.0.right" timestamp="1607498697720">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="291" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607465086312" />
+    <state width="1899" height="291" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607498697720" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1607290610832">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
