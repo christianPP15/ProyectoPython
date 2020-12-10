@@ -7,14 +7,7 @@ from Repositorios import ClienteRepository
 from Servicios import db
 import datetime
 
-def reservarPlaza():
-    tipo=int(input("1.Turismo\t"
-           "2.Motocicleta\t"
-           "3.Movilidad reducida"))
-    while tipo>3 or tipo<=0:
-        tipo=int(input("1.Turismo\t"
-           "2.Motocicleta\t"
-           "3.Movilidad reducida"))
+def depositarVehiculo(tipo,matricula):
     if tipo==1:
         tipo="Turismo"
     elif tipo==2:
@@ -24,13 +17,12 @@ def reservarPlaza():
     plazaOcupar=PlazaServicio.darPlazaLibreTipo(tipo)
     if plazaOcupar!=-1:
         PlazaServicio.ocuparPlaza(plazaOcupar)
-        matricula=input("Introduce la matricula de su vehículo")
         vehiculo=Vehiculos.Vehiculos(matricula=matricula,tipo=tipo)
         db.session.add(vehiculo)
         ticket=Ticket.Ticket(vehiculo=vehiculo,plaza=plazaOcupar,coste=0,pin=random.randint(111111,999999),fechaEntrada=datetime.datetime.now(),fechaSalida=None)
         db.session.add(ticket)
-        TicketServicio.pintarTicket(ticket)
         db.session.commit()
+        return TicketServicio.pintarTicket(ticket)
     else:
         print(f"Imposible realizar la operación, sin plazas disponibles para {tipo}")
 

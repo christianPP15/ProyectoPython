@@ -1,7 +1,7 @@
 from Repositorios import TicketRepository
 import datetime
 def pintarTicket(ticket):
-    TicketRepository.pintarTicket(ticket)
+    return TicketRepository.pintarTicket(ticket)
 
 def buscarTicketRetirada(pin,matricula,identificador):
     return TicketRepository.buscarTicketRetirada(pin,matricula,identificador)

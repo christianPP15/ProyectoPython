@@ -2,11 +2,13 @@ from Servicios import db
 from Modelos import Ticket,Vehiculos,Plaza
 import datetime
 def pintarTicket(ticket):
-    print("------------------------------")
-    print(f"Entrada -> {ticket.fechaEntrada}")
-    print(f"PIN -> {ticket.pin}")
-    print(f"Identificador de la plaza {ticket.plaza.identificador}")
-    print("------------------------------")
+    return f"------------------------------\n" \
+           f"Entrada -> {ticket.fechaEntrada}\n" \
+           f"PIN -> {ticket.pin}\n" \
+           f"Identificador de la plaza {ticket.plaza.identificador}\n" \
+           f"------------------------------"
+
+
 
 
 def buscarTicketRetirada( pin, matricula, identificador):
