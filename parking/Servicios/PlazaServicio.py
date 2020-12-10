@@ -11,9 +11,10 @@ def mostrarDisponibilidad():
     turismos = db.session.query(Plaza.Plaza).filter_by(_Plaza__tipo='Turismo')
     motos = db.session.query(Plaza.Plaza).filter_by(_Plaza__tipo='Moto')
     movilidad=db.session.query(Plaza.Plaza).filter_by(_Plaza__tipo='Movilidad reducida')
-    print(f"Encontramos disponibles {PlazaRepository.contadorPlazasLibres(turismos)} plazas para turismo")
-    print(f"Encontramos disponibles {PlazaRepository.contadorPlazasLibres(motos)} plazas para motos")
-    print(f"Encontramos disponibles {PlazaRepository.contadorPlazasLibres(movilidad)} plazas para movilidad reducida")
+    return f"Encontramos disponibles {PlazaRepository.contadorPlazasLibres(turismos)} plazas para turismo\n" \
+           f"Encontramos disponibles {PlazaRepository.contadorPlazasLibres(motos)} plazas para motos\n" \
+           f"Encontramos disponibles {PlazaRepository.contadorPlazasLibres(movilidad)} plazas para movilidad reducida"
+
 
 def darPlazaLibreTipo(tipo):
     return PlazaRepository.darPlazaLibreTipo(tipo)

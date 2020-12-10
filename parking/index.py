@@ -1,5 +1,6 @@
 from Servicios import PlazaServicio,AbonoServicio,TicketServicio,ClienteServicio,FacturaServicio
 from Modelos import Ticket,Plaza,Abono,Vehiculos,Clientes
+from Controller import ClienteController
 from Servicios import db
 from tkinter import *
 import datetime
@@ -8,10 +9,7 @@ if __name__=='__main__':
     db.Base.metadata.create_all(db.engine)
 #PlazaServicio.cargarDatosInicio()
 
-def borrar():
-    botonGuardarVehiculo.pack_forget()
-    nuevoBoton=Button(root,text="prueba")
-    nuevoBoton.pack()
+
 root=Tk()
 root.title("Gestión Parking")
 root.iconbitmap("img/icono.ico")
@@ -29,17 +27,24 @@ root.geometry("800x400")
 #              ,height=100
 #              ,relief="groove"
 #              ,bd=5)#otra opcion es sunken
+frame_informacion_parking=Frame(root,
+                         width=500,
+                         height=100,
+                         bd=3,
+                         relief="groove")
+frame_informacion_parking.pack()
+textoInformacion=Label(frame_informacion_parking,foreground="black",text=PlazaServicio.mostrarDisponibilidad())
+textoInformacion.pack()
 
 botonGuardarVehiculo=Button(root,
                         text="Guardar vehículo",
-                        command=borrar,
+                        command=lambda:ClienteController.guardarVehiculo(root,botonGuardarVehiculo,botonRetirarVehiculo),
                         width=50,
                         height=5)
 botonGuardarVehiculo.pack()
 botonRetirarVehiculo=Button(root,
                         text="Retirar vehículo",
                         width=50,
-                        command=lambda: botonRetirarVehiculo.pack_forget(),
                         height=5)
 botonRetirarVehiculo.pack()
 root.mainloop()
