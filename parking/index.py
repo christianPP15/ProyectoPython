@@ -4,10 +4,11 @@ from Controller import IndiceController
 from Servicios import db
 from tkinter import *
 import datetime
+
 if __name__=='__main__':
-    db.Base.metadata.drop_all(db.engine)
+    #db.Base.metadata.drop_all(db.engine)
     db.Base.metadata.create_all(db.engine)
-PlazaServicio.cargarDatosInicio()
+#PlazaServicio.cargarDatosInicio()
 
 
 root=Tk()

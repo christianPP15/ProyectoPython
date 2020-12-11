@@ -1,5 +1,5 @@
 from tkinter import *
-from Controller import ClienteController
+from Controller import ClienteSinAbonarController
 from Servicios import PlazaServicio
 def indice(root):
     #Información menú superior
@@ -19,11 +19,11 @@ def indice(root):
     botonGuardarVehiculo=Button(label_guardado_retirar_no_abono,
                             text="Guardar vehículo",
                             height=4,
-                            command=lambda:ClienteController.guardarVehiculo(root,label_guardado_retirar_no_abono,label_guardado_retirar_abono,textoInformacion,frame_informacion_parking))
+                            command=lambda:guardarVehiculoSinAbono(root,frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion))
     botonGuardarVehiculo.pack(side=LEFT,fill="x",expand=1)
     botonRetirarVehiculo=Button(label_guardado_retirar_no_abono,
                             text="Retirar vehículo",
-                            height=4)
+                            height=4,command=lambda:retirarVehiculoSinAbono(root,frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion))
     botonRetirarVehiculo.pack(side=RIGHT,fill="x",expand=1)
     #Botonera label_guardado_retirar_no_abono
 
@@ -32,11 +32,31 @@ def indice(root):
     label_guardado_retirar_abono.pack(fill="x",expand=1,anchor=N)
     botonGuardarVehiculoAbono=Button(label_guardado_retirar_abono,
                             text="Guardar vehículo abonado",
-                            height=4,
-                            command=lambda:ClienteController.guardarVehiculo(root,botonGuardarVehiculo,botonRetirarVehiculo))
+                            height=4)
     botonGuardarVehiculoAbono.pack(side=LEFT,fill="x",expand=1)
     botonRetirarVehiculoAbono=Button(label_guardado_retirar_abono,
                             text="Retirar vehículo abonado",
                             height=4)
     botonRetirarVehiculoAbono.pack(side=RIGHT,fill="x",expand=1)
     #Botonera label_guardado_retirar_abono
+
+    #Botonera admin
+    botonAdministracion=Button(root,text="Zona administracion",width=400,height=4,bd=1,relief="groove")
+    botonAdministracion.pack(side=BOTTOM)
+
+def guardarVehiculoSinAbono(root,frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion):
+    frame_informacion_parking.destroy()
+    textoInformacion.destroy()
+    label_guardado_retirar_no_abono.destroy()
+    label_guardado_retirar_abono.destroy()
+    botonAdministracion.destroy()
+    ClienteSinAbonarController.guardarVehiculo_obtenerInfo(root)
+
+
+def retirarVehiculoSinAbono(root,frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion):
+    frame_informacion_parking.destroy()
+    textoInformacion.destroy()
+    label_guardado_retirar_no_abono.destroy()
+    label_guardado_retirar_abono.destroy()
+    botonAdministracion.destroy()
+    ClienteSinAbonarController.retirarVehiculoObtenerInfo(root)

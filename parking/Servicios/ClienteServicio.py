@@ -1,3 +1,5 @@
+from tkinter import messagebox
+
 from Servicios import PlazaServicio
 import random
 from Modelos import Vehiculos
@@ -27,24 +29,21 @@ def depositarVehiculo(tipo,matricula):
         print(f"Imposible realizar la operación, sin plazas disponibles para {tipo}")
 
 
-def retirarVehiculo():
-    matricula=input("Introduce la matricula de su vehículo")
-    pin=int(input("Introduce el pin asignado"))
-    identificador=input("Introduce el identificador de la plaza")
+def retirarVehiculo(matricula,pin,identificador):
     ticket=TicketServicio.buscarTicketRetirada(pin,matricula,identificador)
     if ticket!=-1:
         plaza=ticket.plaza
         ticket.fechaSalida=datetime.datetime.now()
         precio=round(((ticket.fechaSalida-ticket.fechaEntrada).total_seconds() / 60)*ticket.plaza.coste_minimo,2)
         ticket.coste=precio
-        ClienteRepository.pago(ticket.coste)
+        messagebox.showinfo(message=f"Debes pagar un total de {precio}", title="Pago")
         db.session.add(ticket)
         PlazaServicio.liberarPlaza(plaza)
         db.session.add(plaza)
         db.session.commit()
-        print("Gracias por contar con nosotros")
+        return True
     else:
-        print("Ticket no encontrado")
+        return False
 
 
 

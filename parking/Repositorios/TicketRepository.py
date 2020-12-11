@@ -3,7 +3,7 @@ from Modelos import Ticket,Vehiculos,Plaza
 import datetime
 def pintarTicket(ticket):
     return f"------------------------------\n" \
-           f"Entrada -> {ticket.fechaEntrada}\n" \
+           f"Entrada -> {ticket.fechaEntrada.year}/{ticket.fechaEntrada.month}/{ticket.fechaEntrada.day} {ticket.fechaEntrada.hour}:{ticket.fechaEntrada.minute}:{ticket.fechaEntrada.second}\n" \
            f"PIN -> {ticket.pin}\n" \
            f"Identificador de la plaza {ticket.plaza.identificador}\n" \
            f"------------------------------"
