@@ -4,17 +4,24 @@ from Controller import IndiceController
 from Servicios import ClienteServicio
 from Servicios import PlazaServicio
 
-
+def volverMenuPrincipalGuardarVehiculoSinAbono(root, frame_campos, frame_tipos, botonEnviar,botonMenuPrincipal):
+    frame_tipos.pack_forget()
+    frame_campos.pack_forget()
+    botonEnviar.pack_forget()
+    botonMenuPrincipal.pack_forget()
+    IndiceController.indice(root)
 def guardarVehiculo_obtenerInfo(root):
+    botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverMenuPrincipalGuardarVehiculoSinAbono(root, frame_campos, frame_tipos, botonEnviar,botonMenuPrincipal))
+    botonMenuPrincipal.pack(anchor=N,side=LEFT)
     var = IntVar()
-    frame_campos = Frame(root, bd=1, relief="groove", width=600)
+    frame_campos = Frame(root, bd=1, relief="groove", width=100)
     frame_campos.pack()
     nombre_label = Label(frame_campos, text="Matricula:")
     nombre_label.config(padx=10, pady=10)
     nombre_label.pack(side=LEFT, fill="x", expand=1)
     input_nombre = Entry(frame_campos)
     input_nombre.pack(side=RIGHT, fill="x", expand=1)
-    frame_tipos = Frame(root, bd=1, relief="groove", width=600)
+    frame_tipos = Frame(root, bd=1, relief="groove", width=100)
     frame_tipos.pack()
     checkbox_turismo = Radiobutton(frame_tipos, text="Turismo", variable=var, value=1).pack()
     checkbox_moto = Radiobutton(frame_tipos, text="Motocicleta", variable=var, value=2).pack()
@@ -23,7 +30,6 @@ def guardarVehiculo_obtenerInfo(root):
                          command=lambda: guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, var, botonEnviar,
                                                                   input_nombre))
     botonEnviar.pack(anchor=S, side=BOTTOM)
-
 
 def borrarBotonEInfo(boton, info, texto, root):
     boton.destroy()
@@ -54,8 +60,19 @@ def guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, opcion, boton, mat
         guardarVehiculo_obtenerInfo(root)
         messagebox.showinfo(message="Error, todos los campos deben ir completos", title="Error con la información")
 
-
+def volverMenuPrincipalRetirarVehiculoSinAbono(root, frame_matricula, frame_pin, frame_identificador,botonEnviar, input_identificador, input_matricula,input_pin,botonMenuPrincipal):
+    frame_matricula.destroy()
+    frame_pin.destroy()
+    frame_identificador.destroy()
+    botonEnviar.destroy()
+    input_pin.destroy()
+    botonMenuPrincipal.destroy()
+    input_matricula.destroy()
+    input_identificador.destroy()
+    IndiceController.indice(root)
 def retirarVehiculoObtenerInfo(root):
+    botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverMenuPrincipalRetirarVehiculoSinAbono(root, frame_matricula, frame_pin, frame_identificador,botonEnviar, input_identificador, input_matricula,input_pin,botonMenuPrincipal))
+    botonMenuPrincipal.pack(anchor=N,side=LEFT)
     frame_matricula = Frame(root, bd=1, relief="groove", width=600)
     frame_matricula.pack()
     frame_pin = Frame(root, bd=1, relief="groove", width=600)
@@ -80,12 +97,12 @@ def retirarVehiculoObtenerInfo(root):
     botonEnviar = Button(root, text="Enviar información", width=50, height=5,
                          command=lambda: procesarDatosRetirada(root, frame_matricula, frame_pin, frame_identificador,
                                                                botonEnviar, input_identificador, input_matricula,
-                                                               input_pin))
+                                                               input_pin,botonMenuPrincipal))
     botonEnviar.pack(anchor=S, side=BOTTOM)
 
 
 def procesarDatosRetirada(root, frame_matricula, frame_pin, frame_identificador, botonEnviar, input_identificador,
-                          input_matricula, input_pin):
+                          input_matricula, input_pin,botonMenuPrincipal):
     identificador = input_identificador.get()
     matricula = input_matricula.get()
     pin = input_pin.get()
@@ -96,6 +113,7 @@ def procesarDatosRetirada(root, frame_matricula, frame_pin, frame_identificador,
     input_pin.destroy()
     input_matricula.destroy()
     input_identificador.destroy()
+    botonMenuPrincipal.destroy()
     obtenerYprocesarInformacionRetirarVehiculoNoAbonado(root, identificador, matricula, pin)
 
 
