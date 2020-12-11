@@ -52,4 +52,4 @@ def estadoParking():
             diccionarioEstado[i.identificador]="Plaza ocupada"
     return diccionarioEstado
 def pintarEstado(mapa):
-    PlazaRepository.pintarEstado(mapa)
+    return PlazaRepository.pintarEstado(mapa)

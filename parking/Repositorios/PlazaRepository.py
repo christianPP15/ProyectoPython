@@ -35,5 +35,15 @@ def consultarTodasLasPlazas():
     return plazas
 
 def pintarEstado(mapa):
+    cadena1=""
+    cadena2=""
+    i=0
+
     for k,v in mapa.items():
-        print(k+" -> "+v)
+        if i<25:
+            i+=1
+            cadena1+=f"{k} -> {v}\n"
+        else:
+            cadena2+=f"{k} -> {v}\n"
+
+    return cadena1,cadena2

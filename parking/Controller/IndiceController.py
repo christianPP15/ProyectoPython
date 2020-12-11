@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 
-from Controller import ClienteSinAbonarController
+from Controller import ClienteSinAbonarController,PlazaController
 from Servicios import PlazaServicio
 def indice(root):
     #Información menú superior
@@ -103,10 +103,62 @@ def verificarContraseña(root,frame_contra,contra_label,input_contra,botonEnviar
     botonMenuPrincipal.destroy()
     if contra!="":
         if contra=="1234":
-            pass
+            administracion(root)
         else:
             messagebox.showinfo(message="Contraseña incorrecta", title="Contraseña")
             accesoAdministracionError(root)
     else:
         messagebox.showinfo(message="El campo de contraseña debe ser completado", title="Contraseña")
         accesoAdministracionError(root)
+
+def volverInicioAdministracion(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
+    boton_inicio.destroy()
+    frame_opcion_estado_facturacion.destroy()
+    frame_opcion_consulta_abono.destroy()
+    caducidadAbonoBoton.destroy()
+    indice(root)
+def redirigirEstadoParking(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
+    boton_inicio.destroy()
+    frame_opcion_estado_facturacion.destroy()
+    frame_opcion_consulta_abono.destroy()
+    caducidadAbonoBoton.destroy()
+    PlazaController.estadoParking(root)
+def administracion(root):
+    #Información menú superior
+    boton_inicio=Button(root,text="Volver al menú principal",
+                             width=50,
+                             height=4,
+                             bd=3,
+                             relief="groove",command=lambda:volverInicioAdministracion(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton))
+    boton_inicio.pack()
+    #Información menú superior
+
+    #Botonera frame_opcion_estado_facturacion
+    frame_opcion_estado_facturacion=Frame(root,bd=1,relief="groove")
+    frame_opcion_estado_facturacion.pack(fill="x",expand=1,anchor=N)
+    estado=Button(frame_opcion_estado_facturacion,
+                            text="Estado del parking",
+                            height=4,command=lambda:redirigirEstadoParking(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton))
+    estado.pack(side=LEFT,fill="x",expand=1)
+    facturacion=Button(frame_opcion_estado_facturacion,
+                            text="Facturación",
+                            height=4)
+    facturacion.pack(side=RIGHT,fill="x",expand=1)
+    #Botonera frame_opcion_estado_facturacion
+
+    #Botonera frame_opcion_consulta_abono
+    frame_opcion_consulta_abono=Frame(root,bd=1,relief="groove")
+    frame_opcion_consulta_abono.pack(fill="x",expand=1,anchor=N)
+    consultaAbonosBoton=Button(frame_opcion_consulta_abono,
+                            text="Consulta de abonos",
+                            height=4)
+    consultaAbonosBoton.pack(side=LEFT,fill="x",expand=1)
+    gestionAbonosBoton=Button(frame_opcion_consulta_abono,
+                            text="Gestion abonos",
+                            height=4)
+    gestionAbonosBoton.pack(side=RIGHT,fill="x",expand=1)
+    #Botonera frame_opcion_consulta_abono
+
+    #Botonera caducidad
+    caducidadAbonoBoton=Button(root,text="Caducidad abonos",width=400,height=4,bd=1,relief="groove")
+    caducidadAbonoBoton.pack(side=BOTTOM)

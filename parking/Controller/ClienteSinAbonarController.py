@@ -28,7 +28,7 @@ def guardarVehiculo_obtenerInfo(root):
     checkbox_movilidad = Radiobutton(frame_tipos, text="Movilidad reducida", variable=var, value=3).pack()
     botonEnviar = Button(root, text="Enviar información", width=50, height=5,
                          command=lambda: guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, var, botonEnviar,
-                                                                  input_nombre))
+                                                                  input_nombre,botonMenuPrincipal))
     botonEnviar.pack(anchor=S, side=BOTTOM)
 
 def borrarBotonEInfo(boton, info, texto, root):
@@ -38,9 +38,10 @@ def borrarBotonEInfo(boton, info, texto, root):
     IndiceController.indice(root)
 
 
-def guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, opcion, boton, matricula):
+def guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, opcion, boton, matricula,botonMenuPrincipal):
     frame_tipos.pack_forget()
     frame_campos.pack_forget()
+    botonMenuPrincipal.destroy()
     boton.pack_forget()
     if opcion.get() != 0 and matricula.get() != "":
         informacion_ticket = Frame(root,
