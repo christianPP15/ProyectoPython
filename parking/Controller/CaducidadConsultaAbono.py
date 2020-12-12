@@ -45,7 +45,7 @@ def verificarAnio(root,frame_contra,label_anio,input_anio,botonEnviar,botonMenuA
         frame_informacion_consulta.pack()
         textoInformacion=Label(frame_informacion_consulta,foreground="black",text=FacturaServicio.calcularFacturasAnio(anio))
         textoInformacion.pack(anchor=N)
-        volverAdmin = Button(root, text="Consultar datos", width=50, height=5,command=lambda:volverAlMenuAdministracionTrasConsultar(root,frame_informacion_consulta,textoInformacion,volverAdmin))
+        volverAdmin = Button(root, text="Volver al menú administracion", width=50, height=5,command=lambda:volverAlMenuAdministracionTrasConsultar(root,frame_informacion_consulta,textoInformacion,volverAdmin))
         volverAdmin.pack(anchor=N, side=TOP)
     else:
         messagebox.showinfo(message="Error, el campo año debe ir completo", title="Error con la información")

@@ -30,17 +30,11 @@ def devolverTodosLosTicketsTerminados():
     )
 
 
-def devolverFacturasConFechaFinalEntreDosFechas():
+def devolverFacturasConFechaFinalEntreDosFechas(anio1,mes1,dia1,anio2,mes2,dia2):
     fecha1=datetime.datetime.now()
     fecha2=datetime.datetime.now()
     comprobados=[]
-    anio1=int(input("Introduce el año de la primera fecha"))
-    mes1=int(input("Introduce el mes de la primera fecha"))
-    dia1=int(input("Introduce el día de la primera fecha"))
     fecha_limite_inferior=fecha1.replace(year=anio1,month=mes1,day=dia1)
-    anio2=int(input("Introduce el año de la segunda fecha"))
-    mes2=int(input("Introduce el mes de la segunda fecha"))
-    dia2=int(input("Introduce el día de la segunda fecha"))
     fecha_limite_superior=fecha2.replace(year=anio2,month=mes2,day=dia2)
     tickets=devolverTodosLosTicketsTerminados()
     for ticket in tickets:

@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 
-from Controller import ClienteSinAbonarController, PlazaController, AbonoController,CaducidadConsultaAbono
+from Controller import ClienteSinAbonarController, PlazaController, AbonoController,CaducidadConsultaAbono,TicketController
 from Servicios import PlazaServicio
 def indice(root):
     #Información menú superior
@@ -128,6 +128,9 @@ def redirigirEstadoParking(root,boton_inicio,frame_opcion_estado_facturacion,fra
 def redirigirConsultaAbono(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
     eliminarMenuAdmin(boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton)
     CaducidadConsultaAbono.consultaAbono(root)
+def redirigirFacturacion(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
+    eliminarMenuAdmin(boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton)
+    TicketController.facturacion_datos(root)
 def administracion(root):
     #Información menú superior
     boton_inicio=Button(root,text="Volver al menú principal",
@@ -147,7 +150,7 @@ def administracion(root):
     estado.pack(side=LEFT,fill="x",expand=1)
     facturacion=Button(frame_opcion_estado_facturacion,
                             text="Facturación",
-                            height=4)
+                            height=4,command=lambda:redirigirFacturacion(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton))
     facturacion.pack(side=RIGHT,fill="x",expand=1)
     #Botonera frame_opcion_estado_facturacion
 
