@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 
-from Controller import ClienteSinAbonarController,PlazaController
+from Controller import ClienteSinAbonarController, PlazaController, AbonoController,CaducidadConsultaAbono
 from Servicios import PlazaServicio
 def indice(root):
     #Información menú superior
@@ -117,12 +117,17 @@ def volverInicioAdministracion(root,boton_inicio,frame_opcion_estado_facturacion
     frame_opcion_consulta_abono.destroy()
     caducidadAbonoBoton.destroy()
     indice(root)
-def redirigirEstadoParking(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
+def eliminarMenuAdmin(boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
     boton_inicio.destroy()
     frame_opcion_estado_facturacion.destroy()
     frame_opcion_consulta_abono.destroy()
     caducidadAbonoBoton.destroy()
+def redirigirEstadoParking(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
+    eliminarMenuAdmin(boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton)
     PlazaController.estadoParking(root)
+def redirigirConsultaAbono(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
+    eliminarMenuAdmin(boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton)
+    CaducidadConsultaAbono.consultaAbono(root)
 def administracion(root):
     #Información menú superior
     boton_inicio=Button(root,text="Volver al menú principal",
@@ -151,7 +156,7 @@ def administracion(root):
     frame_opcion_consulta_abono.pack(fill="x",expand=1,anchor=N)
     consultaAbonosBoton=Button(frame_opcion_consulta_abono,
                             text="Consulta de abonos",
-                            height=4)
+                            height=4,command=lambda:redirigirConsultaAbono(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton))
     consultaAbonosBoton.pack(side=LEFT,fill="x",expand=1)
     gestionAbonosBoton=Button(frame_opcion_consulta_abono,
                             text="Gestion abonos",
