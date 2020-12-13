@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 
-from Controller import ClienteSinAbonarController, PlazaController, AbonoController,CaducidadConsultaAbono,TicketController
+from Controller import ClienteSinAbonarController, PlazaController,CaducidadConsultaAbono,TicketController,AbonadoController
 from Servicios import PlazaServicio
 def indice(root):
     #Información menú superior
@@ -34,11 +34,12 @@ def indice(root):
     label_guardado_retirar_abono.pack(fill="x",expand=1,anchor=N)
     botonGuardarVehiculoAbono=Button(label_guardado_retirar_abono,
                             text="Guardar vehículo abonado",
-                            height=4)
+                            height=4,
+                            command=lambda:guardarVehiculoConAbono(root,frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion))
     botonGuardarVehiculoAbono.pack(side=LEFT,fill="x",expand=1)
     botonRetirarVehiculoAbono=Button(label_guardado_retirar_abono,
                             text="Retirar vehículo abonado",
-                            height=4)
+                            height=4,command=lambda:retirarVehiculoConAbono(root,frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion))
     botonRetirarVehiculoAbono.pack(side=RIGHT,fill="x",expand=1)
     #Botonera label_guardado_retirar_abono
 
@@ -62,6 +63,12 @@ def retirarVehiculoSinAbono(root,frame_informacion_parking,textoInformacion,labe
     borrarMenuPrincipal(frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion)
     ClienteSinAbonarController.retirarVehiculoObtenerInfo(root)
 
+def guardarVehiculoConAbono(root,frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion):
+    borrarMenuPrincipal(frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion)
+    AbonadoController.depositarAbonado(root)
+def retirarVehiculoConAbono(root,frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion):
+    borrarMenuPrincipal(frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion)
+    AbonadoController.retirarVehiculoAbonado(root)
 def accesoAdministracion(root,frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion):
     borrarMenuPrincipal(frame_informacion_parking,textoInformacion,label_guardado_retirar_no_abono,label_guardado_retirar_abono,botonAdministracion)
     botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverAlMenuPrincipal(root,frame_contra,contra_label,input_contra,botonEnviar,botonMenuPrincipal))

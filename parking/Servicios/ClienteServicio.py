@@ -1,5 +1,7 @@
 from tkinter import messagebox
 
+from sqlalchemy.util import NoneType
+
 from Servicios import PlazaServicio
 import random
 from Modelos import Vehiculos
@@ -50,24 +52,25 @@ def retirarVehiculo(matricula,pin,identificador):
 def buscarClientePorAbono(abono):
     return ClienteRepository.buscarClientePorAbono(abono)
 
-def depositarAbonados():
-    matricula=input("Introduzca la matricula de su vehículo")
-    dni=input("Introduzca su dni")
-    cliente=ClienteRepository.buscarClientePorDniMatricula(dni,matricula)
-    PlazaServicio.ocuparPlaza(cliente.abono.plaza)
-    db.session.add(cliente.abono.plaza)
-    db.session.commit()
-    print("Vehículo guardado correctamente, recuerde que su pin es: "+str(cliente.abono.pin))
+def depositarAbonados(matricula,dni):
+    try:
+        cliente=ClienteRepository.buscarClientePorDniMatricula(dni,matricula)
+        PlazaServicio.ocuparPlaza(cliente.abono.plaza)
+        db.session.add(cliente.abono.plaza)
+        db.session.commit()
+        return "Vehículo guardado correctamente, recuerde que su pin es: "+str(cliente.abono.pin)
+    except :
+        return "No encontramos existencias para los datos especificados"
 
-def retirarAbono():
-    matricula=input("Introduzca la matricula de su vehículo")
-    dni=input("Introduzca su dni")
-    pin=input("Introduzca el pin")
-    cliente=ClienteRepository.buscarClientePorDniPinMatricula(dni,matricula,pin)
-    PlazaServicio.liberarPlaza(cliente.abono.plaza)
-    db.session.add(cliente.abono.plaza)
-    db.session.commit()
-    print("Gracias por usar nuestros servicios")
+def retirarAbono(matricula,dni,pin):
+    try:
+        cliente=ClienteRepository.buscarClientePorDniPinMatricula(dni,matricula,pin)
+        PlazaServicio.liberarPlaza(cliente.abono.plaza)
+        db.session.add(cliente.abono.plaza)
+        db.session.commit()
+        return "Gracias por usar nuestros servicios"
+    except:
+        return "No se encuentran datos con esa información"
 
 def buscarClientePorDniMatricula(dni,matricula):
     return ClienteRepository.buscarClientePorDniMatricula(dni,matricula)
