@@ -16,18 +16,7 @@ root.title("Gestión Parking")
 root.iconbitmap("img/icono.ico")
 root.resizable(True,True)
 root.geometry("800x400")
-#root.config(bg="grey")
-# frame=Frame(root)
-# frame.pack(side=LEFT,
-#            anchor=N,
-#            fill="x",
-#            expand=1)#Existe fill y ocupa todo alto, y anchor S se situa debajo, expand=1
-#Para usar fill x necesitamos usar expand 1/True si usamos y no
-# frame.config(bg="blue"
-#              ,width=200
-#              ,height=100
-#              ,relief="groove"
-#              ,bd=5)#otra opcion es sunken
+
 IndiceController.indice(root)
 
 

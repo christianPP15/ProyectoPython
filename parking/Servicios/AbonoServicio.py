@@ -134,27 +134,29 @@ def edicionAbono():
     abono.meses=mes
     abono.fechaFinal=fechaFinal
 
-def caducidadAbonoMes():
-    mes=int(input("Mes a comprobar: "))
-    anio=int(input("Año a comprobar: "))
+def caducidadAbonoMes(mes,anio):
     caducados=AbonoRepository.devolverCaducadosEnElMes(mes,anio)
     clientes=[]
     for i in caducados:
         clientes.append(ClienteServicio.buscarClientePorAbono(i))
-    print("Caduca el abono de los siguientes clientes")
-    print("---------------------------------------------------")
+    cadena=""
+    cadena+="Caduca el abono de los siguientes clientes\n"
+    cadena+="---------------------------------------------------\n"
     for i in clientes:
-        print("Nombre y apellidos "+i.nombre+ " "+i.apellidos+ " y con DNI "+i.dni)
-    print("---------------------------------------------------")
+        cadena+="Nombre y apellidos "+i.nombre+ " "+i.apellidos+ " y con DNI "+i.dni+"\n"
+    cadena+="---------------------------------------------------\n"
+    return cadena
 
 def caducidadAbonoProximos10Dias():
     caducados=AbonoRepository.caducidadAbonoProximosDias()
     clientes=[]
     for i in caducados:
         clientes.append(ClienteServicio.buscarClientePorAbono(i))
-    print("Caduca el abono de los siguientes clientes")
-    print("---------------------------------------------------")
+    cadena=""
+    cadena+="Caduca el abono de los siguientes clientes\n"
+    cadena+="---------------------------------------------------\n"
     for i in clientes:
-        print("Nombre y apellidos "+i.nombre+ " "+i.apellidos)
-    print("---------------------------------------------------")
+        cadena+=("Nombre y apellidos "+i.nombre+ " "+i.apellidos+"\n")
+    cadena+="---------------------------------------------------\n"
+    return cadena
 
