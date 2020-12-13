@@ -23,7 +23,7 @@ def menuGestionAbono(root):
     crearBoton.pack(side=LEFT,fill="x",expand=1)
     EditarBoton=Button(botoneraMenu,
                             text="Editar Abono",
-                            height=4)
+                            height=4,command=lambda:menuEditar(root,boton_inicio,botoneraMenu,crearBoton,EditarBoton,EliminarBoton))
     EditarBoton.pack(side=RIGHT,fill="x",expand=1)
     EliminarBoton=Button(botoneraMenu,
                             text="Eliminar Abono",
@@ -191,6 +191,136 @@ def eliminarAbonoCompletar(root,frame_pin,frame_identificador,input_pin,input_id
     if pin!="" and identificador!="":
         mensaje=AbonoServicio.borrarAbono(pin,identificador)
         mostrarMensaje(root,mensaje)
+    else:
+        messagebox.showinfo(message="Error, todos los cambos deben completarse", title="Error con la información")
+        menuGestionAbono(root)
+def eliminarMenuEditar(boton_inicio,frame_botonera_editar):
+    boton_inicio.destroy()
+    frame_botonera_editar.destroy()
+def volverMenuAdmin(root,boton_inicio,frame_botonera_editar):
+    eliminarMenuEditar(boton_inicio,frame_botonera_editar)
+    menuGestionAbono(root)
+
+def menuEditar(root,boton_inicio,botoneraMenu,crearBoton,EditarBoton,EliminarBoton):
+    eliminarMenu(boton_inicio,botoneraMenu,crearBoton,EditarBoton,EliminarBoton)
+    boton_inicio=Button(root,text="Volver al menú principal",
+                             width=50,
+                             height=4,
+                             bd=3,
+                             relief="groove",command=lambda:volverMenuAdmin(root,boton_inicio,frame_botonera_editar))
+    boton_inicio.pack()
+    frame_botonera_editar=Frame(root,bd=1,relief="groove")
+    frame_botonera_editar.pack(fill="x",expand=1,anchor=N)
+    editarUsuario=Button(frame_botonera_editar,
+                            text="Editar información usuario",
+                            height=4,command=lambda:editUsuario(root,boton_inicio,frame_botonera_editar))
+    editarUsuario.pack(side=LEFT,fill="x",expand=1)
+    editAbono=Button(frame_botonera_editar,
+                            text="Editar abono",
+                            height=4,command=lambda:None)
+    editAbono.pack(side=RIGHT,fill="x",expand=1)
+
+def editUsuario(root,boton_inicio,frame_botonera_editar):
+        eliminarMenuEditar(boton_inicio,frame_botonera_editar)
+
+        frame_dni_antiguo = Frame(root, bd=1, relief="groove", width=600)
+        frame_dni_antiguo.pack()
+        dni2_label = Label(frame_dni_antiguo, text="Introduce el antiguo dni del cliente:", width=50)
+        dni2_label.config(padx=10, pady=10)
+        dni2_label.pack(side=LEFT, fill="x", expand=1)
+        input_dni2 = Entry(frame_dni_antiguo, width=50)
+        input_dni2.pack(side=RIGHT, fill="x", expand=1)
+
+        frame_matricula_antiguo = Frame(root, bd=1, relief="groove", width=600)
+        frame_matricula_antiguo.pack()
+        matricula2_label = Label(frame_matricula_antiguo, text="Introduce la matricula anterior:", width=20)
+        matricula2_label.config(padx=10, pady=10)
+        matricula2_label.pack(side=LEFT, fill="x", expand=1)
+        input_matricula2 = Entry(frame_matricula_antiguo, width=50)
+        input_matricula2.pack(side=RIGHT, fill="x", expand=1)
+
+        frame_nombre = Frame(root, bd=1, relief="groove", width=600)
+        frame_nombre.pack()
+        nombre_label = Label(frame_nombre, text="Nombre del cliente:", width=20)
+        nombre_label.config(padx=10, pady=10)
+        nombre_label.pack(side=LEFT, fill="x", expand=1)
+        input_nombre = Entry(frame_nombre, width=50)
+        input_nombre.pack(side=RIGHT, fill="x", expand=1)
+
+        frame_apellidos= Frame(root, bd=1, relief="groove", width=600)
+        frame_apellidos.pack()
+        apellidos_label = Label(frame_apellidos, text="Apellidos del cliente:", width=20)
+        apellidos_label.config(padx=10, pady=10)
+        apellidos_label.pack(side=LEFT, fill="x", expand=1)
+        input_apellidos = Entry(frame_apellidos, width=50)
+        input_apellidos.pack(side=RIGHT, fill="x", expand=1)
+
+        frame_dni= Frame(root, bd=1, relief="groove", width=600)
+        frame_dni.pack()
+        dni_label = Label(frame_dni, text="Nuevo DNI del cliente:", width=20)
+        dni_label.config(padx=10, pady=10)
+        dni_label.pack(side=LEFT, fill="x", expand=1)
+        input_dni = Entry(frame_dni, width=50)
+        input_dni.pack(side=RIGHT, fill="x", expand=1)
+
+        frame_matricula= Frame(root, bd=1, relief="groove", width=600)
+        frame_matricula.pack()
+        matricula_label = Label(frame_matricula, text="Nueva Matricula del vehículo del cliente:", width=30)
+        matricula_label.config(padx=10, pady=10)
+        matricula_label.pack(side=LEFT, fill="x", expand=1)
+        input_matricula = Entry(frame_matricula, width=50)
+        input_matricula.pack(side=RIGHT, fill="x", expand=1)
+
+        frame_email= Frame(root, bd=1, relief="groove", width=600)
+        frame_email.pack()
+        email_label = Label(frame_email, text="Email del cliente:", width=20)
+        email_label.config(padx=10, pady=10)
+        email_label.pack(side=LEFT, fill="x", expand=1)
+        input_email = Entry(frame_email, width=50)
+        input_email.pack(side=RIGHT, fill="x", expand=1)
+
+        frame_tarjeta= Frame(root, bd=1, relief="groove", width=600)
+        frame_tarjeta.pack()
+        tarjeta_label = Label(frame_tarjeta, text="Tarjeta del cliente:", width=20)
+        tarjeta_label.config(padx=10, pady=10)
+        tarjeta_label.pack(side=LEFT, fill="x", expand=1)
+        input_tarjeta = Entry(frame_tarjeta, width=50)
+        input_tarjeta.pack(side=RIGHT, fill="x", expand=1)
+
+        botonEnviar = Button(root, text="Enviar información", width=50, height=5,
+                         command=lambda:procesarInfoEditUsuario(root,frame_dni_antiguo,frame_dni,frame_matricula_antiguo,frame_matricula,
+                                                                frame_tarjeta,frame_nombre,frame_apellidos,frame_email,
+                                                                input_dni2,input_dni,input_matricula2,input_matricula,
+                                                                input_tarjeta,input_nombre,input_apellidos,input_email,botonEnviar))
+        botonEnviar.pack(anchor=S, side=BOTTOM)
+
+def procesarInfoEditUsuario(root,frame_dni_antiguo,frame_dni,frame_matricula_antiguo,frame_matricula,
+                                                                frame_tarjeta,frame_nombre,frame_apellidos,frame_email,
+                                                                input_dni2,input_dni,input_matricula2,input_matricula,
+                                                                input_tarjeta,input_nombre,input_apellidos,input_email,botonEnviar):
+    dni_antiguo=input_dni2.get()
+    matricula_antigua=input_matricula2.get()
+    dni=input_dni.get()
+    matricula=input_matricula.get()
+    tarjeta=input_tarjeta.get()
+    nombre=input_nombre.get()
+    apellidos=input_apellidos.get()
+    email=input_email.get()
+    frame_dni_antiguo.destroy()
+    frame_dni.destroy()
+    frame_matricula_antiguo.destroy()
+    frame_matricula.destroy()
+    frame_tarjeta.destroy()
+    frame_nombre.destroy()
+    frame_apellidos.destroy()
+    frame_email.destroy()
+    botonEnviar.destroy()
+    if dni_antiguo.strip()!="" and matricula_antigua.strip()!="" and dni.strip()!="" and matricula.strip()!="" and tarjeta.strip()!="" and nombre.strip()!="" and apellidos.strip()!="" and email.strip()!="":
+        resultado=AbonoServicio.edicionCliente(dni_antiguo,matricula_antigua,nombre,apellidos,dni,matricula,email,tarjeta)
+        if resultado:
+            mostrarMensaje(root,"La edición se ha completado con exito")
+        else:
+            mostrarMensaje(root,f"No se ha encontrado un cliente con dni->{dni_antiguo} y matricula de vehículo {matricula_antigua}")
     else:
         messagebox.showinfo(message="Error, todos los cambos deben completarse", title="Error con la información")
         menuGestionAbono(root)

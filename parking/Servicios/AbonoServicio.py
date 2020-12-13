@@ -71,23 +71,20 @@ def borrarAbono(pin,identificador):
     else:
         return "Error con el identificador de la plaza"
 
-def edicionCliente():
-    nombre=input("Introduzca su nombre")
-    apellidos=input("Introduzca sus apellidos")
-    dni=input("Introduzca su dni")
-    matricula=input("Introduzca la matricula de su vehículo")
-    email=input("Introduzca su email")
-    tarjeta=input("Introduzca su tarjeta de crédito")
-    cliente=ClienteServicio.buscarClientePorDniMatricula(dni,matricula)
-    cliente.vehiculo.matricula=matricula
-    cliente.tarjeta=tarjeta
-    cliente.nombre=nombre
-    cliente.apellidos=apellidos
-    cliente.email=email
-    cliente.dni=dni
-    db.session.add(cliente)
-    db.session.commit()
-    print("Edición llevada a cabo correctamente")
+def edicionCliente(dni_antiguo,matricula_antigua,nombre,apellidos,dni,matricula,email,tarjeta):
+    cliente=ClienteServicio.buscarClientePorDniMatricula(dni_antiguo,matricula_antigua)
+    if cliente!=None:
+        cliente.vehiculo.matricula=matricula
+        cliente.tarjeta=tarjeta
+        cliente.nombre=nombre
+        cliente.apellidos=apellidos
+        cliente.email=email
+        cliente.dni=dni
+        db.session.add(cliente)
+        db.session.commit()
+        return True
+    else:
+        return False
 
 def edicionAbono():
     dni=input("Introduzca su dni")
