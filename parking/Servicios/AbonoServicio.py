@@ -3,37 +3,11 @@ from Modelos import Abono,Clientes,Vehiculos,Factura
 from Repositorios import AbonoRepository
 import datetime
 import random
-def AltaAbono():
-    meses={"1.Mensual":"25€","2.Trimestral":"70€","3.Semestral":"130€","4.Anual":"200€"}
-    for k,v in meses.items():
-        print(k+" -> "+v)
-    opcion=int(input("Elige una opción(1-4)"))
-    while opcion>4 or opcion<0:
-        opcion=int(input("Elige una opción(1-4)"))
-    print("Indica el tipo de plaza que desea")
-    tipo=int(input("1.Turismo\t"
-           "2.Motocicleta\t"
-           "3.Movilidad reducida"))
-    while tipo>3 or tipo<=0:
-        tipo=int(input("1.Turismo\t"
-           "2.Motocicleta\t"
-           "3.Movilidad reducida"))
-    if tipo==1:
-        tipo="Turismo"
-    elif tipo==2:
-        tipo="Moto"
-    else:
-        tipo="Movilidad reducida"
+def AltaAbono(opcion,tipo,nombre,apellidos,dni,matricula,email,tarjeta):
     plazaReservada=PlazaServicio.darPlazaLibreTipo(tipo)
     PlazaServicio.reservarPlaza(plazaReservada)
     mes,precio,fechaFinal=switchMeses(opcion)
     abono=Abono.Abono(fechaInicial=datetime.datetime.now(),fechaFinal=fechaFinal,pin=random.randint(111111,999999),meses=mes,precio=precio,plaza=plazaReservada)
-    nombre=input("Introduzca su nombre")
-    apellidos=input("Introduzca sus apellidos")
-    dni=input("Introduzca su dni")
-    matricula=input("Introduzca la matricula de su vehículo")
-    email=input("Introduzca su email")
-    tarjeta=input("Introduzca su tarjeta de crédito")
     vehiculoNuevo=Vehiculos.Vehiculos(matricula=matricula,tipo=tipo)
     cliente=Clientes.Cliente(nombre=nombre,apellidos=apellidos,vehiculo=vehiculoNuevo,abono=abono,dni=dni,email=email,tarjeta=tarjeta)
     factura=Factura.Factura(fechaCreacion=datetime.datetime.now(),cliente=cliente,coste=precio)
@@ -43,7 +17,7 @@ def AltaAbono():
     db.session.add(plazaReservada)
     db.session.add(abono)
     db.session.commit()
-
+    return abono.pin
 def switchMeses(opcion):
     actual=datetime.datetime.now()
     mes=None
@@ -82,10 +56,8 @@ def switchMeses(opcion):
     return mes, precio,fechaFinal
 
 
-def borrarAbono():
-    pin=input("Introduce el pin asignada a la plaza")
-    identificadorPlaza=input("Introduce el identificador de la plaza")
-    abono,plaza=AbonoRepository.buscarAbonoPorIdentificadorYpin(pin,identificadorPlaza)
+def borrarAbono(pin,identificador):
+    abono,plaza=AbonoRepository.buscarAbonoPorIdentificadorYpin(pin,identificador.lower())
     if plaza:
         if abono:
             PlazaServicio.desReservarPlaza(plaza)
@@ -93,11 +65,11 @@ def borrarAbono():
             db.session.add(plaza)
             db.session.delete(abono)
             db.session.commit()
-            print("Se ha completado de forma satisfactoria")
+            return "Se ha completado de forma satisfactoria"
         else:
-            print("Error con la el pin de la plaza")
+            return "Error con la el pin de la plaza"
     else:
-        print("Error con el identificador de la plaza")
+        return "Error con el identificador de la plaza"
 
 def edicionCliente():
     nombre=input("Introduzca su nombre")

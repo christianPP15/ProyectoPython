@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 
 from Controller import ClienteSinAbonarController, PlazaController, CaducidadConsultaAbono, TicketController, \
-    AbonadoController, CaducidadAbonoController
+    AbonadoController, CaducidadAbonoController, GestionAbonoController
 from Servicios import PlazaServicio
 def indice(root):
     #Información menú superior
@@ -142,6 +142,9 @@ def redirigirFacturacion(root,boton_inicio,frame_opcion_estado_facturacion,frame
 def redirigirCaducidad(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
     eliminarMenuAdmin(boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton)
     CaducidadAbonoController.menuCaducidadAbono(root)
+def rediridirMenuGestionAbono(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton):
+    eliminarMenuAdmin(boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton)
+    GestionAbonoController.menuGestionAbono(root)
 def administracion(root):
     #Información menú superior
     boton_inicio=Button(root,text="Volver al menú principal",
@@ -174,7 +177,7 @@ def administracion(root):
     consultaAbonosBoton.pack(side=LEFT,fill="x",expand=1)
     gestionAbonosBoton=Button(frame_opcion_consulta_abono,
                             text="Gestion abonos",
-                            height=4)
+                            height=4,command=lambda:rediridirMenuGestionAbono(root,boton_inicio,frame_opcion_estado_facturacion,frame_opcion_consulta_abono,caducidadAbonoBoton))
     gestionAbonosBoton.pack(side=RIGHT,fill="x",expand=1)
     #Botonera frame_opcion_consulta_abono
 
