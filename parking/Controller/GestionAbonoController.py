@@ -217,9 +217,71 @@ def menuEditar(root,boton_inicio,botoneraMenu,crearBoton,EditarBoton,EliminarBot
     editarUsuario.pack(side=LEFT,fill="x",expand=1)
     editAbono=Button(frame_botonera_editar,
                             text="Editar abono",
-                            height=4,command=lambda:None)
+                            height=4,command=lambda:editarAbono(root,boton_inicio,frame_botonera_editar))
     editAbono.pack(side=RIGHT,fill="x",expand=1)
+def editarAbono(root,boton_inicio,frame_botonera_editar):
+    eliminarMenuEditar(boton_inicio,frame_botonera_editar)
+    opcion=IntVar()
+    frame_dni= Frame(root, bd=1, relief="groove", width=600)
+    frame_dni.pack()
+    dni_label = Label(frame_dni, text="DNI del cliente:", width=20)
+    dni_label.config(padx=10, pady=10)
+    dni_label.pack(side=LEFT, fill="x", expand=1)
+    input_dni = Entry(frame_dni, width=50)
+    input_dni.pack(side=RIGHT, fill="x", expand=1)
 
+    frame_matricula= Frame(root, bd=1, relief="groove", width=600)
+    frame_matricula.pack()
+    matricula_label = Label(frame_matricula, text="Matricula del vehículo del cliente:", width=30)
+    matricula_label.config(padx=10, pady=10)
+    matricula_label.pack(side=LEFT, fill="x", expand=1)
+    input_matricula = Entry(frame_matricula, width=50)
+    input_matricula.pack(side=RIGHT, fill="x", expand=1)
+    frame_pin= Frame(root, bd=1, relief="groove", width=600)
+    frame_pin.pack()
+    pin_label = Label(frame_pin, text="Pin del cliente:", width=30)
+    pin_label.config(padx=10, pady=10)
+    pin_label.pack(side=LEFT, fill="x", expand=1)
+    input_pin = Entry(frame_pin, width=50)
+    input_pin.pack(side=RIGHT, fill="x", expand=1)
+    frame_opciones_meses=Frame(root,bd=1,relief="groove",width=200)
+    frame_opciones_meses.pack()
+    checkbox_1mes=Radiobutton(frame_opciones_meses,text="mensual:25€",variable=opcion,value=1).pack()
+    checkbox_3mes=Radiobutton(frame_opciones_meses,text="Trimestral:70€",variable=opcion,value=2).pack()
+    checkbox_6mes=Radiobutton(frame_opciones_meses,text="Semestral:130€",variable=opcion,value=3).pack()
+    checkbox_12mes=Radiobutton(frame_opciones_meses,text="Anual:200€",variable=opcion,value=4).pack()
+    botonEnviar = Button(root, text="Enviar información", width=50, height=5,
+                         command=lambda:procesarCambioAbonoEditar(root,frame_matricula,frame_opciones_meses,frame_dni,frame_pin,
+                                                                opcion,input_matricula,input_dni,input_pin,botonEnviar))
+    botonEnviar.pack(anchor=S, side=BOTTOM)
+def procesarCambioAbonoEditar(root,frame_matricula,frame_opciones_meses,frame_dni,frame_pin,
+                                opcion,input_matricula,input_dni,input_pin,botonEnviar):
+    pin=input_pin.get()
+    opcion=int(opcion.get())
+    dni=input_dni.get()
+    matricula=input_matricula.get()
+    frame_matricula.destroy()
+    frame_opciones_meses.destroy()
+    frame_dni.destroy()
+    frame_matricula.destroy()
+    frame_pin.destroy()
+    botonEnviar.destroy()
+    if pin.strip()!="" and dni.strip()!="" and matricula.strip()!="":
+        try:
+            if opcion!=0:
+                resultado=AbonoServicio.edicionAbono(dni,matricula,pin,opcion)
+                if resultado:
+                    mostrarMensaje(root,"Edición completada con exito")
+                else:
+                    mostrarMensaje(root,"No encontramos ningún abono relacionado con los datos aportados")
+            else:
+                raise ValueError
+        except ValueError:
+            messagebox.showinfo(message="Error, debe seleccionar una tarifa", title="Error con la información")
+            menuGestionAbono(root)
+    else:
+        messagebox.showinfo(message="Error, todos los cambos deben completarse", title="Error con la información")
+        menuGestionAbono(root)
 def editUsuario(root,boton_inicio,frame_botonera_editar):
         eliminarMenuEditar(boton_inicio,frame_botonera_editar)
 

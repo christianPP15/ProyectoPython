@@ -86,22 +86,17 @@ def edicionCliente(dni_antiguo,matricula_antigua,nombre,apellidos,dni,matricula,
     else:
         return False
 
-def edicionAbono():
-    dni=input("Introduzca su dni")
-    matricula=input("Introduzca la matricula de su vehículo")
-    pin=input("Introduzca su pin")
+def edicionAbono(dni,matricula,pin,opcion):
     cliente=ClienteServicio.buscarClientePorDniPinMatricula(dni,matricula,pin)
-    abono=cliente.abono
-    meses={"1.Mensual":"25€","2.Trimestral":"70€","3.Semestral":"130€","4.Anual":"200€"}
-    for k,v in meses.items():
-        print(k+" -> "+v)
-    opcion=int(input("Elige una opción(1-4)"))
-    while opcion>4 or opcion<0:
-        opcion=int(input("Elige una opción(1-4)"))
-    mes,precio,fechaFinal=switchMeses(opcion)
-    abono.precio=precio
-    abono.meses=mes
-    abono.fechaFinal=fechaFinal
+    if cliente!=None:
+        abono=cliente.abono
+        mes,precio,fechaFinal=switchMeses(opcion)
+        abono.precio=precio
+        abono.meses=mes
+        abono.fechaFinal=fechaFinal
+        return True
+    else:
+        return False
 
 def caducidadAbonoMes(mes,anio):
     caducados=AbonoRepository.devolverCaducadosEnElMes(mes,anio)
