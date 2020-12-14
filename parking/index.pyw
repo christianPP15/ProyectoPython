@@ -19,9 +19,7 @@ root.geometry("800x400")
 
 IndiceController.indice(root)
 
-
-
 root.mainloop()
-#agregar una w a la extesion .py-> .pyw para que se ejecute sin consola
+
 
 

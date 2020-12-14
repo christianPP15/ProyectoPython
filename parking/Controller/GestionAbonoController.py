@@ -219,8 +219,22 @@ def menuEditar(root,boton_inicio,botoneraMenu,crearBoton,EditarBoton,EliminarBot
                             text="Editar abono",
                             height=4,command=lambda:editarAbono(root,boton_inicio,frame_botonera_editar))
     editAbono.pack(side=RIGHT,fill="x",expand=1)
+def volverMenuGestionEdit(root,boton_inicio,frame_dni,frame_matricula,frame_opciones_meses,frame_pin,botonEnviar):
+    boton_inicio.destroy()
+    frame_dni.destroy()
+    frame_matricula.destroy()
+    frame_opciones_meses.destroy()
+    frame_pin.destroy()
+    botonEnviar.destroy()
+    menuGestionAbono(root)
 def editarAbono(root,boton_inicio,frame_botonera_editar):
     eliminarMenuEditar(boton_inicio,frame_botonera_editar)
+    boton_inicio=Button(root,text="Volver al menú principal",
+                             width=20,
+                             height=4,
+                             bd=3,
+                             relief="groove",command=lambda:volverMenuGestionEdit(root,boton_inicio,frame_dni,frame_matricula,frame_opciones_meses,frame_pin,botonEnviar))
+    boton_inicio.pack(side=LEFT,anchor=N)
     opcion=IntVar()
     frame_dni= Frame(root, bd=1, relief="groove", width=600)
     frame_dni.pack()
