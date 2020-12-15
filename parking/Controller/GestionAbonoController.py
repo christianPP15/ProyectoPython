@@ -50,9 +50,17 @@ def volverAdminDesdeMenu(root, boton_inicio, botoneraMenu, crearBoton, EditarBot
     eliminarMenu(boton_inicio, botoneraMenu, crearBoton, EditarBoton, EliminarBoton)
     IndiceController.administracion(root)
 
-
+def volverMenuPrincipalDesdeCrearAbono(root,botonMenuPrincipal,botonEnviar,boton_inicio,frame_vehiculo,frame_opciones_meses):
+    botonMenuPrincipal.destroy()
+    botonEnviar.destroy()
+    boton_inicio.destroy()
+    frame_opciones_meses.destroy()
+    frame_vehiculo.destroy()
+    menuGestionAbono(root)
 def crearAbonoFormulario(root, boton_inicio, botoneraMenu, crearBoton, EditarBoton, EliminarBoton):
     eliminarMenu(boton_inicio, botoneraMenu, crearBoton, EditarBoton, EliminarBoton)
+    botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverMenuPrincipalDesdeCrearAbono(root,botonMenuPrincipal,botonEnviar,boton_inicio,frame_vehiculo,frame_opciones_meses))
+    botonMenuPrincipal.pack(anchor=N,side=LEFT)
     tipo = IntVar()
     opcion = IntVar()
     frame_vehiculo = Frame(root, bd=1, relief="groove", width=200)
@@ -185,9 +193,17 @@ def volverMenuGestion(root, caducados, botonSalir):
     botonSalir.destroy()
     menuGestionAbono(root)
 
-
+def volverAlMenuPrincipalDesdeBorrado(root,botonMenuPrincipal,botonEnviar,boton_inicio,frame_pin,frame_identificador):
+    boton_inicio.destroy()
+    botonEnviar.destroy()
+    botonMenuPrincipal.destroy()
+    frame_pin.destroy()
+    frame_identificador.destroy()
+    menuGestionAbono(root)
 def formularioBorrarAbono(root, boton_inicio, botoneraMenu, crearBoton, EditarBoton, EliminarBoton):
     eliminarMenu(boton_inicio, botoneraMenu, crearBoton, EditarBoton, EliminarBoton)
+    botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverAlMenuPrincipalDesdeBorrado(root,botonMenuPrincipal,botonEnviar,boton_inicio,frame_pin,frame_identificador))
+    botonMenuPrincipal.pack(anchor=N,side=LEFT)
     frame_pin = Frame(root, bd=1, relief="groove", width=600)
     frame_pin.pack()
     pin_label = Label(frame_pin, text="Pin del cliente:", width=20)
@@ -341,10 +357,25 @@ def procesarCambioAbonoEditar(root, frame_matricula, frame_opciones_meses, frame
         messagebox.showinfo(message="Error, todos los cambos deben completarse", title="Error con la información")
         menuGestionAbono(root)
 
-
+def volverMenuDesdeEliminar(root,botonMenuPrincipal,botonEnviar,boton_inicio,frame_dni_antiguo,frame_matricula_antiguo
+                            ,frame_nombre,frame_apellidos,frame_dni,frame_matricula,frame_email,frame_tarjeta):
+    botonMenuPrincipal.destroy()
+    botonEnviar.destroy()
+    boton_inicio.destroy()
+    frame_matricula.destroy()
+    frame_apellidos.destroy()
+    frame_dni.destroy()
+    frame_email.destroy()
+    frame_nombre.destroy()
+    frame_tarjeta.destroy()
+    frame_dni_antiguo.destroy()
+    frame_matricula_antiguo.destroy()
+    menuGestionAbono(root)
 def editUsuario(root, boton_inicio, frame_botonera_editar):
     eliminarMenuEditar(boton_inicio, frame_botonera_editar)
-
+    botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverMenuDesdeEliminar(root,botonMenuPrincipal,botonEnviar,boton_inicio,frame_dni_antiguo,frame_matricula_antiguo
+                                                                                                                            ,frame_nombre,frame_apellidos,frame_dni,frame_matricula,frame_email,frame_tarjeta))
+    botonMenuPrincipal.pack(anchor=N,side=LEFT)
     frame_dni_antiguo = Frame(root, bd=1, relief="groove", width=600)
     frame_dni_antiguo.pack()
     dni2_label = Label(frame_dni_antiguo, text="Introduce el antiguo dni del cliente:", width=50)
