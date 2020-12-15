@@ -1,16 +1,16 @@
-from Servicios import db,PlazaServicio,ClienteServicio
-from Modelos import Abono,Clientes,Vehiculos,Factura
+from Servicios import ClienteServicio, db, PlazaServicio
+from Modelos import Abono, Clientes, Factura, Vehiculos
 from Repositorios import AbonoRepository
 import datetime
 import random
 def AltaAbono(opcion,tipo,nombre,apellidos,dni,matricula,email,tarjeta):
-    plazaReservada=PlazaServicio.darPlazaLibreTipo(tipo)
+    plazaReservada= PlazaServicio.darPlazaLibreTipo(tipo)
     PlazaServicio.reservarPlaza(plazaReservada)
     mes,precio,fechaFinal=switchMeses(opcion)
-    abono=Abono.Abono(fechaInicial=datetime.datetime.now(),fechaFinal=fechaFinal,pin=random.randint(111111,999999),meses=mes,precio=precio,plaza=plazaReservada)
-    vehiculoNuevo=Vehiculos.Vehiculos(matricula=matricula,tipo=tipo)
-    cliente=Clientes.Cliente(nombre=nombre,apellidos=apellidos,vehiculo=vehiculoNuevo,abono=abono,dni=dni,email=email,tarjeta=tarjeta)
-    factura=Factura.Factura(fechaCreacion=datetime.datetime.now(),cliente=cliente,coste=precio)
+    abono= Abono.Abono(fechaInicial=datetime.datetime.now(), fechaFinal=fechaFinal, pin=random.randint(111111, 999999), meses=mes, precio=precio, plaza=plazaReservada)
+    vehiculoNuevo= Vehiculos.Vehiculos(matricula=matricula, tipo=tipo)
+    cliente= Clientes.Cliente(nombre=nombre, apellidos=apellidos, vehiculo=vehiculoNuevo, abono=abono, dni=dni, email=email, tarjeta=tarjeta)
+    factura= Factura.Factura(fechaCreacion=datetime.datetime.now(), cliente=cliente, coste=precio)
     db.session.add(factura)
     db.session.add(vehiculoNuevo)
     db.session.add(cliente)
@@ -57,7 +57,7 @@ def switchMeses(opcion):
 
 
 def borrarAbono(pin,identificador):
-    abono,plaza=AbonoRepository.buscarAbonoPorIdentificadorYpin(pin,identificador.lower())
+    abono,plaza= AbonoRepository.buscarAbonoPorIdentificadorYpin(pin, identificador.lower())
     if plaza:
         if abono:
             PlazaServicio.desReservarPlaza(plaza)
@@ -72,7 +72,7 @@ def borrarAbono(pin,identificador):
         return "Error con el identificador de la plaza"
 
 def edicionCliente(dni_antiguo,matricula_antigua,nombre,apellidos,dni,matricula,email,tarjeta):
-    cliente=ClienteServicio.buscarClientePorDniMatricula(dni_antiguo,matricula_antigua)
+    cliente= ClienteServicio.buscarClientePorDniMatricula(dni_antiguo, matricula_antigua)
     if cliente!=None:
         cliente.vehiculo.matricula=matricula
         cliente.tarjeta=tarjeta
@@ -87,7 +87,7 @@ def edicionCliente(dni_antiguo,matricula_antigua,nombre,apellidos,dni,matricula,
         return False
 
 def edicionAbono(dni,matricula,pin,opcion):
-    cliente=ClienteServicio.buscarClientePorDniPinMatricula(dni,matricula,pin)
+    cliente= ClienteServicio.buscarClientePorDniPinMatricula(dni, matricula, pin)
     if cliente!=None:
         abono=cliente.abono
         mes,precio,fechaFinal=switchMeses(opcion)
@@ -101,7 +101,7 @@ def edicionAbono(dni,matricula,pin,opcion):
         return False
 
 def caducidadAbonoMes(mes,anio):
-    caducados=AbonoRepository.devolverCaducadosEnElMes(mes,anio)
+    caducados= AbonoRepository.devolverCaducadosEnElMes(mes, anio)
     clientes=[]
     for i in caducados:
         clientes.append(ClienteServicio.buscarClientePorAbono(i))
@@ -114,7 +114,7 @@ def caducidadAbonoMes(mes,anio):
     return cadena
 
 def caducidadAbonoProximos10Dias():
-    caducados=AbonoRepository.caducidadAbonoProximosDias()
+    caducados= AbonoRepository.caducidadAbonoProximosDias()
     clientes=[]
     for i in caducados:
         clientes.append(ClienteServicio.buscarClientePorAbono(i))

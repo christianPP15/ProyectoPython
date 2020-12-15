@@ -41,7 +41,7 @@ def procesarInformacionGuardarVehiculoBono(root,botonMenuPrincipal,frame_matricu
     input_matricula.destroy()
     input_dni.destroy()
     if dni!="" and matricula!="":
-        mensaje=ClienteServicio.depositarAbonados(matricula,dni)
+        mensaje= ClienteServicio.depositarAbonados(matricula, dni)
         mensajeFinal=Label(root,text=mensaje)
         mensajeFinal.pack()
         volverMenuPrincipalBoton=Button(root,text="Volver al menú principal",command=lambda:volverAlMenuPrincipalTrasCompletar(root,mensajeFinal,volverMenuPrincipalBoton))
@@ -100,7 +100,7 @@ def procesarInformacionRetirarVehiculoAbono(root,frame_iden,input_pin,botonMenuP
     botonEnviar.destroy()
     botonMenuPrincipal.destroy()
     if dni!="" and matricula!="" and pin!="":
-        mensaje=ClienteServicio.retirarAbono(matricula,dni,pin)
+        mensaje= ClienteServicio.retirarAbono(matricula, dni, pin)
         mensajeFinal=Label(root,text=mensaje)
         mensajeFinal.pack()
         volverMenuPrincipalBoton=Button(root,text="Volver al menú principal",command=lambda:volverAlMenuPrincipalTrasCompletar(root,mensajeFinal,volverMenuPrincipalBoton))

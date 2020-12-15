@@ -75,12 +75,12 @@ def redirigirProcesadoInfo(root,botonMenuPrincipalAdmin,frame_mes,frame_anio,bot
         messagebox.showinfo(message="Error, todos los campos deben ir completos", title="Error con la información")
         caducidadMeses(root)
 def caducidadMesesCompletar(root,anio,mes):
-    caducados=Label(root,text=AbonoServicio.caducidadAbonoMes(mes,anio))
+    caducados=Label(root, text=AbonoServicio.caducidadAbonoMes(mes, anio))
     caducados.pack()
     botonSalir=Button(root,text="Volver al inicio",command=lambda:volverAlAdministradorCaducidadDias(root,caducados,botonSalir))
     botonSalir.pack()
 def caducidadDias(root):
-    caducados=Label(root,text=AbonoServicio.caducidadAbonoProximos10Dias())
+    caducados=Label(root, text=AbonoServicio.caducidadAbonoProximos10Dias())
     caducados.pack()
     botonSalir=Button(root,text="Volver al inicio",command=lambda:volverAlAdministradorCaducidadDias(root,caducados,botonSalir))
     botonSalir.pack()

@@ -1,8 +1,10 @@
 from tkinter import *
 from Servicios import PlazaServicio
 from Controller import IndiceController
+
+
 def estadoParking(root):
-    cadena1,cadena2=PlazaServicio.pintarEstado(PlazaServicio.estadoParking())
+    cadena1,cadena2= PlazaServicio.pintarEstado(PlazaServicio.estadoParking())
     frame_informacion_parking=Frame(root,
                              bd=3,
                              relief="groove")

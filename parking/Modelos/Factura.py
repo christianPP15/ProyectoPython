@@ -1,5 +1,5 @@
 from Servicios import db
-from sqlalchemy import Column, Integer, String, Float,Boolean,DateTime,ForeignKey
+from sqlalchemy import Column, Integer, Float, DateTime,ForeignKey
 from sqlalchemy.orm import relationship
 class Factura(db.Base):
     __tablename__='Factura'

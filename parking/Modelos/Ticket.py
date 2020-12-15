@@ -1,10 +1,9 @@
-import random
 import datetime
 
 from sqlalchemy.orm import relationship
 
 from Servicios import db
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, Float, DateTime, ForeignKey
 
 
 class Ticket(db.Base):

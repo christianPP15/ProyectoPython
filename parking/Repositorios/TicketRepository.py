@@ -1,5 +1,5 @@
 from Servicios import db
-from Modelos import Ticket,Vehiculos,Plaza
+from Modelos import Plaza, Ticket, Vehiculos
 import datetime
 def pintarTicket(ticket):
     return f"------------------------------\n" \
@@ -12,12 +12,12 @@ def pintarTicket(ticket):
 
 
 def buscarTicketRetirada( pin, matricula, identificador):
-    ticket=db.session.query(Ticket.Ticket).join(Vehiculos.Vehiculos).join(Plaza.Plaza).filter(
-        Vehiculos.Vehiculos._Vehiculos__matricula==matricula
+    ticket= db.session.query(Ticket.Ticket).join(Vehiculos.Vehiculos).join(Plaza.Plaza).filter(
+        Vehiculos.Vehiculos._Vehiculos__matricula == matricula
     ).filter(
-        Ticket.Ticket._Ticket__pin==pin
+        Ticket.Ticket._Ticket__pin == pin
     ).filter(
-        Plaza.Plaza._Plaza__identificador==identificador
+        Plaza.Plaza._Plaza__identificador == identificador
     ).first()
     if ticket:
         return ticket
@@ -26,7 +26,7 @@ def buscarTicketRetirada( pin, matricula, identificador):
 
 def devolverTodosLosTicketsTerminados():
     return db.session.query(Ticket.Ticket).filter(
-        Ticket.Ticket._Ticket__coste>0
+        Ticket.Ticket._Ticket__coste > 0
     )
 
 

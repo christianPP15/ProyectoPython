@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter import ttk
-import time
 from Controller import IndiceController
-from tkcalendar import Calendar, DateEntry
+from tkcalendar import Calendar
 from Servicios import TicketServicio
+
+
 def crearCalendario1(root,mensaje,botonCalendario1):
     botonCalendario1.destroy()
     mensaje.destroy()
@@ -31,7 +32,7 @@ def procesarFecha2(root,cal,top,fecha1):
     fecha2=cal.selection_get()
     cal.destroy()
     top.destroy()
-    info=TicketServicio.facturacion(fecha1.year,fecha1.month,fecha1.day,fecha2.year,fecha2.month,fecha2.day)
+    info= TicketServicio.facturacion(fecha1.year, fecha1.month, fecha1.day, fecha2.year, fecha2.month, fecha2.day)
     mensaje=Label(root,text=info)
     mensaje.pack()
     volver_inicio = Button(root, text="Volver al inicio",

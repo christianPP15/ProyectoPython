@@ -1,5 +1,7 @@
 from Servicios import db
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Integer, String
+
+
 class Vehiculos(db.Base):
     __tablename__='Vehiculos'
     id=Column(Integer,primary_key=True)

@@ -1,4 +1,4 @@
-from Servicios import db, PlazaServicio
+from Servicios import db
 from Modelos import Abono, Plaza
 import datetime
 

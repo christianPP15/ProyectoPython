@@ -1,5 +1,7 @@
 from Servicios import db
 from Modelos import Factura
+
+
 def devolverFacturas():
     return db.session.query(Factura.Factura).all()
 

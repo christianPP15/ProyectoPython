@@ -1,6 +1,8 @@
 from Repositorios import FacturaRepository
+
+
 def calcularFacturasAnio(anio):
-    facturas=FacturaRepository.facturasAnio(anio)
+    facturas= FacturaRepository.facturasAnio(anio)
     precio=0
     for i in facturas:
         precio+=i.coste

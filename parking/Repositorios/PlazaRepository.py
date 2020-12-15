@@ -1,5 +1,7 @@
 from Servicios import db
 from Modelos import Plaza
+
+
 def ocuparPlaza(plaza):
     plaza.ocupado=True
     db.session.add(plaza)
@@ -24,14 +26,14 @@ def contadorPlazasLibres(listadoTipo):
     return num
 
 def darPlazaLibreTipo(tipo):
-    plazas_tipo=db.session.query(Plaza.Plaza).filter_by(_Plaza__tipo=tipo)
+    plazas_tipo= db.session.query(Plaza.Plaza).filter_by(_Plaza__tipo=tipo)
     for i in plazas_tipo:
         if not i.ocupado:
             return i
     return -1
 
 def consultarTodasLasPlazas():
-    plazas=db.session.query(Plaza.Plaza).all()
+    plazas= db.session.query(Plaza.Plaza).all()
     return plazas
 
 def pintarEstado(mapa):

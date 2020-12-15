@@ -1,6 +1,6 @@
 import random
 from Servicios import db
-from sqlalchemy import Column, Integer, String, Float,Boolean,DateTime,ForeignKey
+from sqlalchemy import Column, Integer, Float, DateTime,ForeignKey
 from sqlalchemy.orm import relationship
 class Abono(db.Base):
     __tablename__ = 'Abono'

@@ -1,14 +1,9 @@
 from tkinter import messagebox
 
-from sqlalchemy.util import NoneType
-
-from Servicios import PlazaServicio
 import random
-from Modelos import Vehiculos
-from Modelos import Ticket
-from Servicios import TicketServicio
+from Modelos import Ticket, Vehiculos
 from Repositorios import ClienteRepository
-from Servicios import db
+from Servicios import db, PlazaServicio, TicketServicio
 import datetime
 
 def depositarVehiculo(tipo,matricula):
@@ -18,12 +13,12 @@ def depositarVehiculo(tipo,matricula):
         tipo="Moto"
     else:
         tipo="Movilidad reducida"
-    plazaOcupar=PlazaServicio.darPlazaLibreTipo(tipo)
+    plazaOcupar= PlazaServicio.darPlazaLibreTipo(tipo)
     if plazaOcupar!=-1:
         PlazaServicio.ocuparPlaza(plazaOcupar)
-        vehiculo=Vehiculos.Vehiculos(matricula=matricula,tipo=tipo)
+        vehiculo= Vehiculos.Vehiculos(matricula=matricula, tipo=tipo)
         db.session.add(vehiculo)
-        ticket=Ticket.Ticket(vehiculo=vehiculo,plaza=plazaOcupar,coste=0,pin=random.randint(111111,999999),fechaEntrada=datetime.datetime.now(),fechaSalida=None)
+        ticket= Ticket.Ticket(vehiculo=vehiculo, plaza=plazaOcupar, coste=0, pin=random.randint(111111, 999999), fechaEntrada=datetime.datetime.now(), fechaSalida=None)
         db.session.add(ticket)
         db.session.commit()
         return TicketServicio.pintarTicket(ticket)
@@ -32,7 +27,7 @@ def depositarVehiculo(tipo,matricula):
 
 
 def retirarVehiculo(matricula,pin,identificador):
-    ticket=TicketServicio.buscarTicketRetirada(pin,matricula,identificador)
+    ticket= TicketServicio.buscarTicketRetirada(pin, matricula, identificador)
     if ticket!=-1:
         plaza=ticket.plaza
         ticket.fechaSalida=datetime.datetime.now()
@@ -54,7 +49,7 @@ def buscarClientePorAbono(abono):
 
 def depositarAbonados(matricula,dni):
     try:
-        cliente=ClienteRepository.buscarClientePorDniMatricula(dni,matricula)
+        cliente= ClienteRepository.buscarClientePorDniMatricula(dni, matricula)
         PlazaServicio.ocuparPlaza(cliente.abono.plaza)
         db.session.add(cliente.abono.plaza)
         db.session.commit()
@@ -64,7 +59,7 @@ def depositarAbonados(matricula,dni):
 
 def retirarAbono(matricula,dni,pin):
     try:
-        cliente=ClienteRepository.buscarClientePorDniPinMatricula(dni,matricula,pin)
+        cliente= ClienteRepository.buscarClientePorDniPinMatricula(dni, matricula, pin)
         PlazaServicio.liberarPlaza(cliente.abono.plaza)
         db.session.add(cliente.abono.plaza)
         db.session.commit()
@@ -73,6 +68,6 @@ def retirarAbono(matricula,dni,pin):
         return "No se encuentran datos con esa información"
 
 def buscarClientePorDniMatricula(dni,matricula):
-    return ClienteRepository.buscarClientePorDniMatricula(dni,matricula)
+    return ClienteRepository.buscarClientePorDniMatricula(dni, matricula)
 def buscarClientePorDniPinMatricula(dni,matricula,pin):
-    return ClienteRepository.buscarClientePorDniPinMatricula(dni,matricula,pin)
+    return ClienteRepository.buscarClientePorDniPinMatricula(dni, matricula, pin)

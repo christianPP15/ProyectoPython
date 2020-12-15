@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from Controller import IndiceController
 from Servicios import ClienteServicio
-from Servicios import PlazaServicio
+
 
 def volverMenuPrincipalGuardarVehiculoSinAbono(root, frame_campos, frame_tipos, botonEnviar,botonMenuPrincipal):
     frame_tipos.pack_forget()
@@ -120,7 +120,7 @@ def procesarDatosRetirada(root, frame_matricula, frame_pin, frame_identificador,
 
 def obtenerYprocesarInformacionRetirarVehiculoNoAbonado(root, identificador, matricula, pin):
     if matricula != "" and identificador != "" and pin != "":
-        operacion=ClienteServicio.retirarVehiculo(matricula.upper(), pin, identificador.lower())
+        operacion= ClienteServicio.retirarVehiculo(matricula.upper(), pin, identificador.lower())
         if operacion:
             messagebox.showinfo(message="Retirada, completada con exito", title="Retirada")
             IndiceController.indice(root)

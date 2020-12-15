@@ -1,4 +1,3 @@
-from sqlalchemy.orm import relationship
 from Servicios import db
 from sqlalchemy import Column, Integer, String, Float,Boolean
 
