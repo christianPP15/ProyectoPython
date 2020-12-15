@@ -47,7 +47,7 @@ def switchMeses(opcion):
             fechaFinal=actual.replace(month=mesesSumar,year=actual.year+1)
         else:
             fechaFinal=actual.replace(month=actual.month+6)
-    elif opcion==200:
+    elif opcion==4:
         mes=12
         precio=200
         fechaFinal=actual.replace(year=actual.year+1)
@@ -94,6 +94,8 @@ def edicionAbono(dni,matricula,pin,opcion):
         abono.precio=precio
         abono.meses=mes
         abono.fechaFinal=fechaFinal
+        db.session.add(abono)
+        db.session.commit()
         return True
     else:
         return False
