@@ -1,7 +1,7 @@
 from tkinter import *
-from tkinter import messagebox
+from tkinter import messagebox, filedialog
 from Controller import IndiceController
-from Servicios import ClienteServicio
+from Servicios import ClienteServicio, LecturaMatriculaServicio
 
 
 def volverMenuPrincipalGuardarVehiculoSinAbono(root, frame_campos, frame_tipos, botonEnviar,botonMenuPrincipal):
@@ -11,7 +11,7 @@ def volverMenuPrincipalGuardarVehiculoSinAbono(root, frame_campos, frame_tipos, 
     botonMenuPrincipal.pack_forget()
     IndiceController.indice(root)
 def guardarVehiculo_obtenerInfo(root):
-    botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverMenuPrincipalGuardarVehiculoSinAbono(root, frame_campos, frame_tipos, botonEnviar,botonMenuPrincipal))
+    botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverMenuPrincipalGuardarVehiculoSinAbono(root,botonProbarLecturaMatricula, frame_campos, frame_tipos, botonEnviar,botonMenuPrincipal))
     botonMenuPrincipal.pack(anchor=N,side=LEFT)
     var = IntVar()
     frame_campos = Frame(root, bd=1, relief="groove", width=100)
@@ -28,20 +28,71 @@ def guardarVehiculo_obtenerInfo(root):
     checkbox_movilidad = Radiobutton(frame_tipos, text="Movilidad reducida", variable=var, value=3).pack()
     botonEnviar = Button(root, text="Enviar información", width=50, height=5,
                          command=lambda: guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, var, botonEnviar,
-                                                                  input_nombre,botonMenuPrincipal))
+                                                                  input_nombre,botonMenuPrincipal,botonProbarLecturaMatricula))
     botonEnviar.pack(anchor=S, side=BOTTOM)
-
+    botonProbarLecturaMatricula = Button(root, text="Probar deteccion de imagen", width=50, height=5,
+                         command=lambda: subidaMatricula(root, frame_campos, frame_tipos, var, botonEnviar,
+                                                                  input_nombre,botonMenuPrincipal,botonProbarLecturaMatricula))
+    botonProbarLecturaMatricula.pack(anchor=S, side=BOTTOM)
+def subidaMatricula(root, frame_campos, frame_tipos, opcion, boton, matricula,botonMenuPrincipal,botonProbarLecturaMatricula):
+    frame_tipos.pack_forget()
+    frame_campos.pack_forget()
+    botonMenuPrincipal.destroy()
+    boton.pack_forget()
+    botonProbarLecturaMatricula.destroy()
+    var = IntVar()
+    root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
+    matricula=LecturaMatriculaServicio.obtenerMatricula(root.filename)
+    aux=[]
+    for i in matricula:
+        aux.append(i)
+    aux.pop()
+    aux.pop()
+    aux.remove(" ")
+    aux.remove(" ")
+    matricula=""
+    for i in aux:
+        matricula+=i
+    frame_tipos = Frame(root, bd=1, relief="groove", width=100)
+    frame_tipos.pack()
+    checkbox_turismo = Radiobutton(frame_tipos, text="Turismo", variable=var, value=1).pack()
+    checkbox_moto = Radiobutton(frame_tipos, text="Motocicleta", variable=var, value=2).pack()
+    checkbox_movilidad = Radiobutton(frame_tipos, text="Movilidad reducida", variable=var, value=3).pack()
+    botonEnviar = Button(root, text="Enviar información", width=50, height=5,
+                         command=lambda: guardarVehiculo_UsarInfoFichero(root, frame_tipos, var, botonEnviar,matricula))
+    botonEnviar.pack(anchor=S, side=BOTTOM)
 def borrarBotonEInfo(boton, info, texto, root):
     boton.destroy()
     info.destroy()
     texto.destroy()
     IndiceController.indice(root)
 
+def guardarVehiculo_UsarInfoFichero(root, frame_tipos, var, botonEnviar,matricula):
+     frame_tipos.destroy()
+     botonEnviar.destroy()
+     if var.get() != 0 and matricula != "":
+        informacion_ticket = Frame(root,
+                                   width=500,
+                                   height=100,
+                                   bd=3,
+                                   relief="groove")
+        informacion_ticket.pack()
+        textoInformacion = Label(informacion_ticket, foreground="black",
+                                 text=ClienteServicio.depositarVehiculo(var.get(), matricula.upper()))
+        textoInformacion.pack(anchor=N)
+        volver_inicio = Button(root, text="Volver al inicio",
+                               command=lambda: borrarBotonEInfo(volver_inicio, informacion_ticket, textoInformacion,
+                                                                root))
+        volver_inicio.pack()
+     else:
+        guardarVehiculo_obtenerInfo(root)
+        messagebox.showinfo(message="Error, todos los campos deben ir completos", title="Error con la información")
 
-def guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, opcion, boton, matricula,botonMenuPrincipal):
+def guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, opcion, boton, matricula,botonMenuPrincipal,botonProbarLecturaMatricula):
     frame_tipos.pack_forget()
     frame_campos.pack_forget()
     botonMenuPrincipal.destroy()
+    botonProbarLecturaMatricula.destroy()
     boton.pack_forget()
     if opcion.get() != 0 and matricula.get() != "":
         informacion_ticket = Frame(root,
@@ -61,9 +112,10 @@ def guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, opcion, boton, mat
         guardarVehiculo_obtenerInfo(root)
         messagebox.showinfo(message="Error, todos los campos deben ir completos", title="Error con la información")
 
-def volverMenuPrincipalRetirarVehiculoSinAbono(root, frame_matricula, frame_pin, frame_identificador,botonEnviar, input_identificador, input_matricula,input_pin,botonMenuPrincipal):
+def volverMenuPrincipalRetirarVehiculoSinAbono(root,botonProbarLecturaMatricula, frame_matricula, frame_pin, frame_identificador,botonEnviar, input_identificador, input_matricula,input_pin,botonMenuPrincipal):
     frame_matricula.destroy()
     frame_pin.destroy()
+    botonProbarLecturaMatricula.destroy()
     frame_identificador.destroy()
     botonEnviar.destroy()
     input_pin.destroy()
