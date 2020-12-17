@@ -43,16 +43,17 @@ def subidaMatricula(root, frame_campos, frame_tipos, opcion, boton, matricula,bo
     var = IntVar()
     root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
     matricula=LecturaMatriculaServicio.obtenerMatricula(root.filename)
-    aux=[]
-    for i in matricula:
-        aux.append(i)
-    aux.pop()
-    aux.pop()
-    aux.remove(" ")
-    aux.remove(" ")
-    matricula=""
-    for i in aux:
-        matricula+=i
+    if matricula!="":
+        aux=[]
+        for i in matricula:
+            aux.append(i)
+        aux.pop()
+        aux.pop()
+        aux.remove(" ")
+        aux.remove(" ")
+        matricula=""
+        for i in aux:
+            matricula+=i
     frame_tipos = Frame(root, bd=1, relief="groove", width=100)
     frame_tipos.pack()
     checkbox_turismo = Radiobutton(frame_tipos, text="Turismo", variable=var, value=1).pack()
