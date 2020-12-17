@@ -1,10 +1,10 @@
 from Controller import IndiceController
-from Servicios import db
+from Servicios import db, PlazaServicio
 from tkinter import *
 
-# db.Base.metadata.drop_all(db.engine)
+#db.Base.metadata.drop_all(db.engine)
 db.Base.metadata.create_all(db.engine)
-# PlazaServicio.cargarDatosInicio()
+#PlazaServicio.cargarDatosInicio(50)
 
 
 root = Tk()

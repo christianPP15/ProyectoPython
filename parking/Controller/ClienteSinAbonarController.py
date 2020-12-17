@@ -3,9 +3,9 @@ from tkinter import messagebox, filedialog
 from Controller import IndiceController
 from Servicios import ClienteServicio, LecturaMatriculaServicio
 
-
-def volverMenuPrincipalGuardarVehiculoSinAbono(root, frame_campos, frame_tipos, botonEnviar,botonMenuPrincipal):
+def volverMenuPrincipalGuardarVehiculoSinAbono(root,botonProbarLecturaMatricula, frame_campos, frame_tipos, botonEnviar,botonMenuPrincipal):
     frame_tipos.pack_forget()
+    botonProbarLecturaMatricula.destroy()
     frame_campos.pack_forget()
     botonEnviar.pack_forget()
     botonMenuPrincipal.pack_forget()

@@ -20,16 +20,19 @@ def mostrarDisponibilidad():
 def darPlazaLibreTipo(tipo):
     return PlazaRepository.darPlazaLibreTipo(tipo)
 
-def cargarDatosInicio():
+def cargarDatosInicio(numPlazas):
+    plazasTurismo=int(round((numPlazas*0.7),0))
+    plazasMotos=int(round((numPlazas*0.15),0))
+    plazasMovilidad=int(round((numPlazas*0.15),0))
     cadena=["Turismo", "Moto", "Movilidad reducida"]
     precio=[0.12,0.08,0.10];
-    for i in range(34):
+    for i in range(plazasTurismo):
         turismo= Plaza.Plaza(tipo=cadena[0], coste_minimo=precio[0], identificador='t' + str(i + 1), ocupado=False, reservado=False)
         db.session.add(turismo)
-    for i in range(8):
+    for i in range(plazasMotos):
         moto= Plaza.Plaza(tipo=cadena[1], coste_minimo=precio[1], identificador='m' + str(i + 1), ocupado=False, reservado=False)
         db.session.add(moto)
-    for i in range(8):
+    for i in range(plazasMovilidad):
         movilidad= Plaza.Plaza(tipo=cadena[2], coste_minimo=precio[2], identificador='r' + str(i + 1), ocupado=False, reservado=False)
         db.session.add(movilidad)
         db.session.commit()
