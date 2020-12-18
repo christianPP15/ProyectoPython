@@ -3,7 +3,7 @@ from tkinter import messagebox
 import random
 from Modelos import Ticket, Vehiculos
 from Repositorios import ClienteRepository
-from Servicios import db, PlazaServicio, TicketServicio
+from Servicios import db, PlazaServicio, TicketServicio, GeneracionPDF
 import datetime
 
 def depositarVehiculo(tipo,matricula):
@@ -19,6 +19,7 @@ def depositarVehiculo(tipo,matricula):
         vehiculo= Vehiculos.Vehiculos(matricula=matricula, tipo=tipo)
         db.session.add(vehiculo)
         ticket= Ticket.Ticket(vehiculo=vehiculo, plaza=plazaOcupar, coste=0, pin=random.randint(111111, 999999), fechaEntrada=datetime.datetime.now(), fechaSalida=None)
+        GeneracionPDF.crearPDF(ticket)
         db.session.add(ticket)
         db.session.commit()
         return TicketServicio.pintarTicket(ticket)

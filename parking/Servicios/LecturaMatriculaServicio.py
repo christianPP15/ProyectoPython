@@ -1,7 +1,7 @@
 import cv2
 import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
-
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\payo.pachr20\AppData\Local\Programs\Tesseract-OCR\tesseract'
+#pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 def obtenerMatricula(ruta):
   text=""
   try:
@@ -36,6 +36,6 @@ def obtenerMatricula(ruta):
 
     cv2.moveWindow('Image',45,10)
     cv2.waitKey(0)
+    return text
   except:
     return text
-
