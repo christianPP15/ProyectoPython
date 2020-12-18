@@ -24,7 +24,7 @@ def depositarVehiculo(tipo,matricula):
         db.session.commit()
         return TicketServicio.pintarTicket(ticket)
     else:
-        print(f"Imposible realizar la operación, sin plazas disponibles para {tipo}")
+        return f"Imposible realizar la operación, sin plazas disponibles para {tipo}"
 
 
 def retirarVehiculo(matricula,pin,identificador):
