@@ -7,7 +7,6 @@ class Plaza(db.Base):
     id = Column(Integer, primary_key=True)
     __identificador = Column(String, nullable=True)
     __tipo = Column(String)
-    __coste_minimo = Column(Float)
     __ocupado=Column(Boolean)
     __reservado=Column(Boolean)
     @property
@@ -25,14 +24,6 @@ class Plaza(db.Base):
     @tipo.setter
     def tipo(self, tipo):
         self.__tipo = tipo
-
-    @property
-    def coste_minimo(self):
-        return self.__coste_minimo
-
-    @coste_minimo.setter
-    def coste_minimo(self, coste_minimo):
-        self.__coste_minimo = coste_minimo
 
     @property
     def identificador(self):

@@ -8,15 +8,17 @@ import datetime
 
 def depositarVehiculo(tipo,matricula):
     if tipo==1:
+        vehiculo= Vehiculos.Turismo(matricula=matricula)
         tipo="Turismo"
     elif tipo==2:
+        vehiculo=Vehiculos.Motocicleta(matricula=matricula)
         tipo="Moto"
     else:
+        vehiculo=Vehiculos.MovilidadReducida(matricula=matricula)
         tipo="Movilidad reducida"
     plazaOcupar= PlazaServicio.darPlazaLibreTipo(tipo)
     if plazaOcupar!=-1:
         PlazaServicio.ocuparPlaza(plazaOcupar)
-        vehiculo= Vehiculos.Vehiculos(matricula=matricula, tipo=tipo)
         db.session.add(vehiculo)
         ticket= Ticket.Ticket(vehiculo=vehiculo, plaza=plazaOcupar, coste=0, pin=random.randint(111111, 999999), fechaEntrada=datetime.datetime.now(), fechaSalida=None)
         GeneracionPDF.crearPDF(ticket)
@@ -32,7 +34,13 @@ def retirarVehiculo(matricula,pin,identificador):
     if ticket!=-1:
         plaza=ticket.plaza
         ticket.fechaSalida=datetime.datetime.now()
-        precio=round(((ticket.fechaSalida-ticket.fechaEntrada).total_seconds() / 60)*ticket.plaza.coste_minimo,2)
+        if isinstance(ticket.vehiculo,Vehiculos.Turismo):
+            costeMinimo=0.12
+        elif isinstance(ticket.vehiculo,Vehiculos.Motocicleta):
+            costeMinimo=0.08
+        else:
+            costeMinimo=0.1
+        precio=round(((ticket.fechaSalida-ticket.fechaEntrada).total_seconds() / 60)*costeMinimo,2)
         ticket.coste=precio
         messagebox.showinfo(message=f"Debes pagar un total de {precio}", title="Pago")
         db.session.add(ticket)
