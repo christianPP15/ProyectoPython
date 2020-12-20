@@ -4,7 +4,7 @@
 ## Contraseña de la zona de administración es 1234.
 ## Se trata de una aplicación desarrollada con tkinter en el que usamos una extensión llamada tkcalendar en este caso la versión 1.6.1.
 ## Utilizamos SQLAlchemy como orm dónde guardamos los datos en un fichero usando sqlite (version 1.3.20).
-## Usado reportlab para la creación de pdf, en este caso se usa para crear los tickets del parking cuando un no abonado entra al parking.
+## Usado reportlab para la creación de pdf, en este caso se usa para crear los tickets del parking cuando un no abonado entra al parking (Se guarda en la carpeta PDF del proyecto). 
 ## He implementado también una versión de prueba en el almacenamiento de vehículo para los no abonados en el cuál se le la matricula desde una imagen.
 ### Este proceso no está terminado por eso solo incluye la versión de pruebas con una imagen.
 ### Solo acepta imagenes tomadas desde una misma perspectiva puesto que no se ha aplicado nada de machine learning.
@@ -13,7 +13,7 @@
 * Instalacion de Tesseract-OCR desde  https://github.com/UB-Mannheim/tesseract/wiki.
 * Instalacion de pytesseract. 
 * En window tendremos que definir donde encontramos tesseract-ocr agregando la linea pytesseract.pytesseract.tesseract_cmd = r'<Ruta>' tras las importaciones.
-  
+* En la carpeta img está la imagen de prueba
 #### ¿Qué proceso utilizamos para leer la imagen?
 1. Importamos cv2 de openCV y pytesseract.
 2. Agregamos la línea pytesseract.pytesseract.tesseract_cmd = r'<Ruta>' (si usamos windows).
