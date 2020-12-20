@@ -1,6 +1,7 @@
 # ProyectoPython
 
 ## Nos encontramos ante un proyecto desarrollado para python 3.9, para la gestión de un parking.
+## Contraseña de la zona de administración es 1234.
 ## Se trata de una aplicación desarrollada con tkinter en el que usamos una extensión llamada tkcalendar en este caso la versión 1.6.1.
 ## Utilizamos SQLAlchemy como orm dónde guardamos los datos en un fichero usando sqlite (version 1.3.20).
 ## Usado reportlab para la creación de pdf, en este caso se usa para crear los tickets del parking cuando un no abonado entra al parking.
