@@ -48,6 +48,7 @@ def procesarInformacionGuardarVehiculoBono(root,botonMenuPrincipal,frame_matricu
         volverMenuPrincipalBoton.pack()
     else:
         messagebox.showinfo(message="Error, todos los campos deben ir completos", title="Error con la información")
+        depositarAbonado(root)
 
 def volverAlMenuPrincipalTrasCompletar(root,mensajeFinal,volverMenuPrincipalBoton):
     mensajeFinal.destroy()

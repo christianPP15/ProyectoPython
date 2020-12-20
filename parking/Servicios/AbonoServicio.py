@@ -8,7 +8,12 @@ def AltaAbono(opcion,tipo,nombre,apellidos,dni,matricula,email,tarjeta):
     PlazaServicio.reservarPlaza(plazaReservada)
     mes,precio,fechaFinal=switchMeses(opcion)
     abono= Abono.Abono(fechaInicial=datetime.datetime.now(), fechaFinal=fechaFinal, pin=random.randint(111111, 999999), meses=mes, precio=precio, plaza=plazaReservada)
-    vehiculoNuevo= Vehiculos.Vehiculos(matricula=matricula, tipo=tipo)
+    if tipo=="Turismo":
+        vehiculoNuevo= Vehiculos.Turismo(matricula=matricula)
+    elif tipo=="Moto":
+        vehiculoNuevo=Vehiculos.Motocicleta(matricula=matricula)
+    else:
+        vehiculoNuevo=Vehiculos.MovilidadReducida(matricula=matricula)
     cliente= Clientes.Cliente(nombre=nombre, apellidos=apellidos, vehiculo=vehiculoNuevo, abono=abono, dni=dni, email=email, tarjeta=tarjeta)
     factura= Factura.Factura(fechaCreacion=datetime.datetime.now(), cliente=cliente, coste=precio)
     db.session.add(factura)

@@ -9,7 +9,6 @@ def facturasAnio(anio):
     facturas=devolverFacturas()
     facturasAni=[]
     for i in facturas:
-        if i.fechaCreacion.year==anio:
+        if i.fechaCreacion.year==int(anio):
             facturasAni.append(i)
-
     return facturasAni

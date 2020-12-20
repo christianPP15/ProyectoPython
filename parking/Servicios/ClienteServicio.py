@@ -32,24 +32,27 @@ def depositarVehiculo(tipo,matricula):
 def retirarVehiculo(matricula,pin,identificador):
     ticket= TicketServicio.buscarTicketRetirada(pin, matricula, identificador)
     if ticket!=-1:
-        plaza=ticket.plaza
-        ticket.fechaSalida=datetime.datetime.now()
-        if isinstance(ticket.vehiculo,Vehiculos.Turismo):
-            costeMinimo=0.12
-        elif isinstance(ticket.vehiculo,Vehiculos.Motocicleta):
-            costeMinimo=0.08
+        if ticket.coste==0:
+            plaza=ticket.plaza
+            ticket.fechaSalida=datetime.datetime.now()
+            if isinstance(ticket.vehiculo,Vehiculos.Turismo):
+                costeMinimo=0.12
+            elif isinstance(ticket.vehiculo,Vehiculos.Motocicleta):
+                costeMinimo=0.08
+            else:
+                costeMinimo=0.1
+            precio=round(((ticket.fechaSalida-ticket.fechaEntrada).total_seconds() / 60)*costeMinimo,2)
+            ticket.coste=precio
+            messagebox.showinfo(message=f"Debes pagar un total de {precio}", title="Pago")
+            db.session.add(ticket)
+            PlazaServicio.liberarPlaza(plaza)
+            db.session.add(plaza)
+            db.session.commit()
+            return "Operacion completada con exito"
         else:
-            costeMinimo=0.1
-        precio=round(((ticket.fechaSalida-ticket.fechaEntrada).total_seconds() / 60)*costeMinimo,2)
-        ticket.coste=precio
-        messagebox.showinfo(message=f"Debes pagar un total de {precio}", title="Pago")
-        db.session.add(ticket)
-        PlazaServicio.liberarPlaza(plaza)
-        db.session.add(plaza)
-        db.session.commit()
-        return True
+            return "El vehículo ya fue retirado anteriormente"
     else:
-        return False
+        return "No existen registros con esos datos"
 
 
 

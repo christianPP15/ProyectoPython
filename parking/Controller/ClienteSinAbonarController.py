@@ -113,10 +113,9 @@ def guardarVehiculo_UsarInfo(root, frame_campos, frame_tipos, opcion, boton, mat
         guardarVehiculo_obtenerInfo(root)
         messagebox.showinfo(message="Error, todos los campos deben ir completos", title="Error con la información")
 
-def volverMenuPrincipalRetirarVehiculoSinAbono(root,botonProbarLecturaMatricula, frame_matricula, frame_pin, frame_identificador,botonEnviar, input_identificador, input_matricula,input_pin,botonMenuPrincipal):
+def volverMenuPrincipalRetirarVehiculoSinAbono(root, frame_matricula, frame_pin, frame_identificador,botonEnviar, input_identificador, input_matricula,input_pin,botonMenuPrincipal):
     frame_matricula.destroy()
     frame_pin.destroy()
-    botonProbarLecturaMatricula.destroy()
     frame_identificador.destroy()
     botonEnviar.destroy()
     input_pin.destroy()
@@ -125,7 +124,7 @@ def volverMenuPrincipalRetirarVehiculoSinAbono(root,botonProbarLecturaMatricula,
     input_identificador.destroy()
     IndiceController.indice(root)
 def retirarVehiculoObtenerInfo(root):
-    botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverMenuPrincipalRetirarVehiculoSinAbono(root, frame_matricula, frame_pin, frame_identificador,botonEnviar, input_identificador, input_matricula,input_pin,botonMenuPrincipal))
+    botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda: volverMenuPrincipalRetirarVehiculoSinAbono(root, frame_matricula, frame_pin, frame_identificador,botonEnviar, input_identificador, input_matricula,input_pin,botonMenuPrincipal))
     botonMenuPrincipal.pack(anchor=N,side=LEFT)
     frame_matricula = Frame(root, bd=1, relief="groove", width=600)
     frame_matricula.pack()
@@ -155,8 +154,7 @@ def retirarVehiculoObtenerInfo(root):
     botonEnviar.pack(anchor=S, side=BOTTOM)
 
 
-def procesarDatosRetirada(root, frame_matricula, frame_pin, frame_identificador, botonEnviar, input_identificador,
-                          input_matricula, input_pin,botonMenuPrincipal):
+def procesarDatosRetirada(root, frame_matricula, frame_pin, frame_identificador,botonEnviar, input_identificador, input_matricula,input_pin,botonMenuPrincipal):
     identificador = input_identificador.get()
     matricula = input_matricula.get()
     pin = input_pin.get()
@@ -174,12 +172,8 @@ def procesarDatosRetirada(root, frame_matricula, frame_pin, frame_identificador,
 def obtenerYprocesarInformacionRetirarVehiculoNoAbonado(root, identificador, matricula, pin):
     if matricula != "" and identificador != "" and pin != "":
         operacion= ClienteServicio.retirarVehiculo(matricula.upper(), pin, identificador.lower())
-        if operacion:
-            messagebox.showinfo(message="Retirada, completada con exito", title="Retirada")
-            IndiceController.indice(root)
-        else:
-            messagebox.showinfo(message="Error, los campos no coinciden", title="Error con la información")
-            retirarVehiculoObtenerInfo(root)
+        messagebox.showinfo(message=operacion, title="Retirada")
+        IndiceController.indice(root)
     else:
         messagebox.showinfo(message="Error, todos los campos deben ir completos", title="Error con la información")
         retirarVehiculoObtenerInfo(root)

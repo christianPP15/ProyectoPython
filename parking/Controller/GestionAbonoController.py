@@ -76,14 +76,15 @@ def crearAbonoFormulario(root, boton_inicio, botoneraMenu, crearBoton, EditarBot
     checkbox_12mes = Radiobutton(frame_opciones_meses, text="Anual:200€", variable=opcion, value=4).pack()
     botonEnviar = Button(root, text="Enviar información", width=50, height=5,
                          command=lambda: creacionDeAbonoCompletar(root, frame_opciones_meses, tipo, opcion,
-                                                                  frame_vehiculo, botonEnviar))
+                                                                  frame_vehiculo, botonEnviar,botonMenuPrincipal))
     botonEnviar.pack(anchor=S, side=BOTTOM)
 
 
-def creacionDeAbonoCompletar(root, frame_opciones_meses, tipo, opcion, frame_vehiculo, botonEnviar):
+def creacionDeAbonoCompletar(root, frame_opciones_meses, tipo, opcion, frame_vehiculo, botonEnviar,botonMenuPrincipal):
     frame_opciones_meses.destroy()
     frame_vehiculo.destroy()
     botonEnviar.destroy()
+    botonMenuPrincipal.destroy()
     try:
         if opcion.get() == 0:
             raise ValueError
@@ -222,16 +223,17 @@ def formularioBorrarAbono(root, boton_inicio, botoneraMenu, crearBoton, EditarBo
 
     botonEnviar = Button(root, text="Enviar información", width=50, height=5,
                          command=lambda: eliminarAbonoCompletar(root, frame_pin, frame_identificador, input_pin,
-                                                                input_iden, botonEnviar))
+                                                                input_iden, botonEnviar,botonMenuPrincipal))
     botonEnviar.pack(anchor=S, side=BOTTOM)
 
 
-def eliminarAbonoCompletar(root, frame_pin, frame_identificador, input_pin, input_iden, botonEnviar):
+def eliminarAbonoCompletar(root, frame_pin, frame_identificador, input_pin, input_iden, botonEnviar,botonMenuPrincipal):
     pin = input_pin.get()
     identificador = input_iden.get()
     frame_identificador.destroy()
     frame_pin.destroy()
     botonEnviar.destroy()
+    botonMenuPrincipal.destroy()
     if pin != "" and identificador != "":
         mensaje = AbonoServicio.borrarAbono(pin, identificador)
         mostrarMensaje(root, mensaje)
@@ -373,6 +375,7 @@ def volverMenuDesdeEliminar(root,botonMenuPrincipal,botonEnviar,boton_inicio,fra
     menuGestionAbono(root)
 def editUsuario(root, boton_inicio, frame_botonera_editar):
     eliminarMenuEditar(boton_inicio, frame_botonera_editar)
+    boton_inicio.destroy()
     botonMenuPrincipal=Button(root,text="Volver al menú principal",width=20,height=2,command=lambda:volverMenuDesdeEliminar(root,botonMenuPrincipal,botonEnviar,boton_inicio,frame_dni_antiguo,frame_matricula_antiguo
                                                                                                                             ,frame_nombre,frame_apellidos,frame_dni,frame_matricula,frame_email,frame_tarjeta))
     botonMenuPrincipal.pack(anchor=N,side=LEFT)
@@ -448,14 +451,15 @@ def editUsuario(root, boton_inicio, frame_botonera_editar):
                                                                  input_dni2, input_dni, input_matricula2,
                                                                  input_matricula,
                                                                  input_tarjeta, input_nombre, input_apellidos,
-                                                                 input_email, botonEnviar))
+                                                                 input_email, botonEnviar,botonMenuPrincipal))
     botonEnviar.pack(anchor=S, side=BOTTOM)
 
 
 def procesarInfoEditUsuario(root, frame_dni_antiguo, frame_dni, frame_matricula_antiguo, frame_matricula,
                             frame_tarjeta, frame_nombre, frame_apellidos, frame_email,
                             input_dni2, input_dni, input_matricula2, input_matricula,
-                            input_tarjeta, input_nombre, input_apellidos, input_email, botonEnviar):
+                            input_tarjeta, input_nombre, input_apellidos, input_email, botonEnviar,botonMenuPrincipal):
+    botonMenuPrincipal.destroy()
     dni_antiguo = input_dni2.get()
     matricula_antigua = input_matricula2.get()
     dni = input_dni.get()
@@ -480,7 +484,7 @@ def procesarInfoEditUsuario(root, frame_dni_antiguo, frame_dni, frame_matricula_
             mostrarMensaje(root, "La edición se ha completado con exito")
         else:
             mostrarMensaje(root,
-                           f"No se ha encontrado un cliente con dni->{dni_antiguo} y matricula de vehículo {matricula_antigua}")
+                           f"No se ha encontrado un cliente con dni {dni_antiguo} y matricula de vehículo {matricula_antigua}")
     else:
         messagebox.showinfo(message="Error, todos los cambos deben completarse", title="Error con la información")
         menuGestionAbono(root)

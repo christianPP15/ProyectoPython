@@ -3,15 +3,16 @@ from tkinter import ttk
 from Controller import IndiceController
 from tkcalendar import Calendar
 from Servicios import TicketServicio
-
+import datetime
 
 def crearCalendario1(root,mensaje,botonCalendario1):
     botonCalendario1.destroy()
     mensaje.destroy()
+    actual=datetime.datetime.now()
     top = Toplevel(root)
     cal = Calendar(top,
                    font="Arial 14", selectmode='day',
-                   cursor="hand1", year=2020, month=12, day=12)
+                   cursor="hand1", year=actual.year, month=actual.month, day=actual.day)
     cal.pack(fill="both", expand=True)
     ttk.Button(top, text="ok", command=lambda:procesarFecha1(root,cal,top)).pack()
 def facturacion_datos(root):
@@ -21,11 +22,12 @@ def facturacion_datos(root):
     botonCalendario1.pack(anchor=N, side=TOP)
 def crearCalendario2(root,mensaje,botonCalendario2,fecha1):
     botonCalendario2.destroy()
+    actual=datetime.datetime.now()
     mensaje.destroy()
     top = Toplevel(root)
     cal = Calendar(top,
                    font="Arial 14", selectmode='day',
-                   cursor="hand1", year=2020, month=12, day=12)
+                   cursor="hand1", year=actual.year, month=actual.month, day=actual.day)
     cal.pack(fill="both", expand=True)
     ttk.Button(top, text="ok", command=lambda:procesarFecha2(root,cal,top,fecha1)).pack()
 def procesarFecha2(root,cal,top,fecha1):

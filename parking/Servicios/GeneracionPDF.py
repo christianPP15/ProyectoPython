@@ -1,6 +1,6 @@
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
-
+from Modelos import Vehiculos
 def crearPDF(ticket):
     c = canvas.Canvas("PDF/ticket"+ticket.vehiculo.matricula+".pdf")
     c.setPageSize((300,300))
@@ -16,10 +16,15 @@ def crearPDF(ticket):
     text.textLine("Plaza : "+ticket.plaza.identificador)
     text.textLine("Matricula :"+ticket.vehiculo.matricula)
     c.drawText(text)
-
+    if isinstance(ticket.vehiculo,Vehiculos.Turismo):
+            costeMinimo=0.12
+    elif isinstance(ticket.vehiculo,Vehiculos.Motocicleta):
+            costeMinimo=0.08
+    else:
+            costeMinimo=0.1
     tarifas=c.beginText(110,120)
     tarifas.setFont("Times-Roman",9)
-    tarifas.textLine(f"El coste por minuto es de {ticket.plaza.coste_minimo} €")
+    tarifas.textLine(f"El coste por minuto es de {costeMinimo} €")
     c.drawText(tarifas)
     c.setFont("Times-Roman",15)
     c.drawString(30,110,"---------------------------------------------------")
